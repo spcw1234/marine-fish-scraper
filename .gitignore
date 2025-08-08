@@ -1,0 +1,111 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+.venv/
+venv/
+ENV/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+logs/
+*.log
+
+# Data directories
+dataset/
+train/
+marine_fish/dataset/
+marine_fish/train/
+marine_fish/metadata/
+marine_fish/sessions/
+
+# Config files with sensitive data
+config.json
+*.key
+*.pem
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+tmp/
+
+# Error logs
+error_log.json
+
+# SSH and connection files
+ssh_config_temp
+connect_ssh.*
+*.bat
+*.ps1
+
+# Hardware specific files
+*esp32*
+*rp2040*
+*oled*
+
+# Test files
+test_*.py
+*_test.py
+
+# Old versions
+*_v2.py
+advanced_*.py
+fixed_*.py
+working_*.py
+marine_fish_scraper.py
+marine_scraper_v2.py
+quickstart_demo.py
+
+# Jupyter notebooks
+*.ipynb
+
+# Documentation files for other projects
+README_ESP32S2.md
+README_RP2040_OLED.md
+SSH_SETUP.md
+
+# Requirements for other projects
+requirements_esp32s2.txt
+
+# Boot and system files
+boot.py
+diskpart_script.txt
+format_e_script.txt
+
+# Examples and tools (keep structure but ignore content)
+examples/
+tools/
+stable_marine_scraper/
+marine_app/
