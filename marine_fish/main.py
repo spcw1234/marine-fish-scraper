@@ -224,13 +224,14 @@ def print_main_menu():
         "├─────────────────────────────────────────────────────────────┤\n"
         "│  1. 전체 이미지 대량 다운로드 (종당 1000장 목표)                │\n"
         "│  2. 특정 과(Family) 선택 다운로드                            │\n"
-        "│  3. 중단된 세션 재개                                         │\n"
-        "│  4. 훈련용 데이터셋 생성                                      │\n"
-        "│  5. 데이터셋 분석 및 통계                                     │\n"
-        "│  6. 오토 라벨링 작업공간 설정                                 │\n"
-        "│  7. 설정 관리                                               │\n"
-        "│  8. 시스템 상태 확인                                         │\n"
-        "│  9. 종료                                                    │\n"
+        "│  3. 개별 종(Species) 선택 다운로드                           │\n"
+        "│  4. 중단된 세션 재개                                         │\n"
+        "│  5. 훈련용 데이터셋 생성                                      │\n"
+        "│  6. 데이터셋 분석 및 통계                                     │\n"
+        "│  7. 오토 라벨링 작업공간 설정                                 │\n"
+        "│  8. 설정 관리                                               │\n"
+        "│  9. 시스템 상태 확인                                         │\n"
+        "│  10. 종료                                                   │\n"
         "└─────────────────────────────────────────────────────────────┘\n"
     )
     print(menu)
@@ -267,6 +268,63 @@ def show_family_selection_menu(taxonomy_manager: TaxonomyManager):
         print("❌ 올바른 숫자를 입력해주세요.")
         return None
 
+def show_genus_selection_menu(taxonomy_manager: TaxonomyManager, family_info):
+    """속 선택 메뉴 표시"""
+    class_name, order_name, family_name = family_info
+    species_list = taxonomy_manager.get_species_by_family(class_name, order_name, family_name)
+    
+    # 속별로 그룹화
+    genera = {}
+    for genus, species in species_list:
+        if genus not in genera:
+            genera[genus] = []
+        genera[genus].append(species)
+    
+    genus_list = list(genera.keys())
+    
+    print(f"\n📋 {family_name} 과의 속(Genus) 목록:")
+    print("─" * 60)
+    
+    for i, genus in enumerate(genus_list, 1):
+        species_count = len(genera[genus])
+        print(f"{i:2d}. {genus} ({species_count}종)")
+        if i % 8 == 0:
+            print()
+    
+    try:
+        choice = int(input(f"\n속을 선택하세요 (1-{len(genus_list)}): "))
+        if 1 <= choice <= len(genus_list):
+            selected_genus = genus_list[choice - 1]
+            return selected_genus, genera[selected_genus]
+        print("❌ 잘못된 선택입니다.")
+        return None, None
+    except ValueError:
+        print("❌ 올바른 숫자를 입력해주세요.")
+        return None, None
+
+def show_species_selection_menu(taxonomy_manager: TaxonomyManager, genus, species_list):
+    """종 선택 메뉴 표시"""
+    print(f"\n📋 {genus} 속의 종(Species) 목록:")
+    print("─" * 60)
+    
+    for i, species in enumerate(species_list, 1):
+        common_names = taxonomy_manager.get_common_names(genus, species)
+        primary_name = common_names[0] if common_names else "Unknown"
+        print(f"{i:2d}. {genus} {species}")
+        print(f"    └─ {primary_name}")
+        if i % 5 == 0:
+            print()
+    
+    try:
+        choice = int(input(f"\n종을 선택하세요 (1-{len(species_list)}): "))
+        if 1 <= choice <= len(species_list):
+            return species_list[choice - 1]
+        print("❌ 잘못된 선택입니다.")
+        return None
+    except ValueError:
+        print("❌ 올바른 숫자를 입력해주세요.")
+        return None
+
 def interactive_menu():
     """인터랙티브 메뉴 시스템"""
     print_banner()
@@ -282,11 +340,11 @@ def interactive_menu():
     
     # MarineScraper 초기화
     from marine_scraper import MarineScraper
-    scraper = MarineScraper(config)
+    scraper = MarineScraper(config, taxonomy_manager)
     
     while True:
         print_main_menu()
-        choice = input("선택하세요 (1-9): ").strip()
+        choice = input("선택하세요 (1-10): ").strip()
         
         if choice == '1':
             print("\n🚀 전체 이미지 대량 다운로드 시작...")
@@ -319,7 +377,7 @@ def interactive_menu():
                     
                     for genus, species in species_list:
                         common_names = taxonomy_manager.get_common_names(genus, species)
-                        downloaded = scraper.scrape_species(genus, species, common_names, 100)
+                        downloaded = scraper.scrape_species(genus, species, common_names, 500)
                         total_downloaded += downloaded
                     
                     duration = time.time() - start_time
@@ -333,6 +391,42 @@ def interactive_menu():
                     break
         
         elif choice == '3':
+            # 개별 종 선택 다운로드
+            while True:
+                print("\n🔍 개별 종 선택 다운로드")
+                
+                # 1단계: 과 선택
+                family_info = show_family_selection_menu(taxonomy_manager)
+                if not family_info:
+                    break
+                
+                # 2단계: 속 선택
+                genus, species_list = show_genus_selection_menu(taxonomy_manager, family_info)
+                if not genus:
+                    continue
+                
+                # 3단계: 종 선택
+                selected_species = show_species_selection_menu(taxonomy_manager, genus, species_list)
+                if not selected_species:
+                    continue
+                
+                # 다운로드 실행
+                common_names = taxonomy_manager.get_common_names(genus, selected_species)
+                print(f"\n🎯 {genus} {selected_species} 다운로드 시작...")
+                
+                import time
+                start_time = time.time()
+                downloaded = scraper.scrape_species(genus, selected_species, common_names, 500)
+                duration = time.time() - start_time
+                
+                print(f"\n🎉 {genus} {selected_species} 다운로드 완료!")
+                print(f"📊 다운로드: {downloaded}장")
+                print(f"⏱️ 소요 시간: {duration/60:.1f}분")
+                
+                if not ask_yes_no("다른 종을 선택하시겠습니까?", default='n'):
+                    break
+        
+        elif choice == '4':
             print("\n🔄 세션 관리 기능은 아직 구현 중입니다.")
             print("현재는 기본 스크래핑만 지원됩니다.")
         
@@ -371,7 +465,7 @@ def interactive_menu():
             print(f"  총 과 수: {stats.get('total_families', 0)}")
             print(f"  총 강 수: {stats.get('total_classes', 0)}")
         
-        elif choice == '9':
+        elif choice == '10':
             print("\n👋 프로그램을 종료합니다.")
             print("🧹 리소스 정리 중...")
             break
@@ -418,7 +512,7 @@ def main():
         
         # MarineScraper 초기화
         from marine_scraper import MarineScraper
-        scraper = MarineScraper(config)
+        scraper = MarineScraper(config, taxonomy_manager)
         
         # 세션 복원 또는 새 세션 시작
         if args.resume:
