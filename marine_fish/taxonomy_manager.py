@@ -31,7 +31,11 @@ class SpeciesInfo:
     @property
     def primary_common_name(self) -> str:
         """주요 일반명 반환"""
-        return self.common_names[0] if self.common_names else self.scientific_name
+        return (
+            self.common_names[0]
+            if self.common_names
+            else self.scientific_name
+        )
 
     def to_dict(self) -> Dict[str, Any]:
         """딕셔너리로 변환"""
@@ -327,6 +331,58 @@ class TaxonomyManager:
                                         "Eyestripe surgeonfish",
                                         "아이스트라이프탱",
                                     ],
+                                    "bariene": [
+                                        "Black-spot surgeonfish",
+                                        "블랙스팟탱",
+                                    ],
+                                    "blochii": [
+                                        "Ringtail surgeonfish",
+                                        "링테일탱",
+                                    ],
+                                    "chronixis": [
+                                        "Chronixis surgeonfish",
+                                        "크로닉시스탱",
+                                    ],
+                                    "guttatus": [
+                                        "Whitespotted surgeonfish",
+                                        "화이트스팟탱",
+                                    ],
+                                    "maculiceps": [
+                                        "White-freckled surgeonfish",
+                                        "화이트프레클드탱",
+                                    ],
+                                    "nigricans": [
+                                        "Whitecheek surgeonfish",
+                                        "화이트치크탱",
+                                    ],
+                                    "nigricauda": [
+                                        "Epaulette surgeonfish",
+                                        "에폴렛탱",
+                                    ],
+                                    "nubilus": [
+                                        "Bluelined surgeonfish",
+                                        "블루라인드탱",
+                                    ],
+                                    "reversus": [
+                                        "Reversed surgeonfish",
+                                        "리버스드탱",
+                                    ],
+                                    "sandvicensis": [
+                                        "Thompson's surgeonfish",
+                                        "톰슨탱",
+                                    ],
+                                    "thompsoni": [
+                                        "Thompson's surgeonfish",
+                                        "톰슨서전피쉬",
+                                    ],
+                                    "triostegus": [
+                                        "Convict surgeonfish",
+                                        "컨빅트탱",
+                                    ],
+                                    "xanthopterus": [
+                                        "Yellowfin surgeonfish",
+                                        "옐로우핀탱",
+                                    ],
                                 },
                                 "Naso": {
                                     "lituratus": [
@@ -344,6 +400,7 @@ class TaxonomyManager:
                                     ],
                                     "vlamingi": [
                                         "Vlaming's unicornfish",
+                                        "블라밍기탱",
                                         "블라밍 유니콘피쉬",
                                     ],
                                     "unicornis": [
@@ -353,6 +410,30 @@ class TaxonomyManager:
                                     "brevirostris": [
                                         "Spotted unicornfish",
                                         "스팟티드 유니콘피쉬",
+                                    ],
+                                    "annulatus": [
+                                        "Whitemargin unicornfish",
+                                        "화이트마진 유니콘피쉬",
+                                    ],
+                                    "caesius": [
+                                        "Gray unicornfish",
+                                        "그레이 유니콘피쉬",
+                                    ],
+                                    "hexacanthus": [
+                                        "Sleek unicornfish",
+                                        "슬릭 유니콘피쉬",
+                                    ],
+                                    "minor": [
+                                        "Blackspine unicornfish",
+                                        "블랙스파인 유니콘피쉬",
+                                    ],
+                                    "reticulatus": [
+                                        "Reticulated unicornfish",
+                                        "레티큘레이티드 유니콘피쉬",
+                                    ],
+                                    "thynnoides": [
+                                        "Oneknife unicornfish",
+                                        "원나이프 유니콘피쉬",
                                     ],
                                 },
                                 "Ctenochaetus": {
@@ -370,6 +451,40 @@ class TaxonomyManager:
                                         "Two-spot bristletooth",
                                         "투스팟브리슬투스",
                                     ],
+                                    "cyanocheilus": [
+                                        "Bluelip bristletooth",
+                                        "블루립브리슬투스",
+                                    ],
+                                    "marginatus": [
+                                        "Blue-spotted bristletooth",
+                                        "블루스팟브리슬투스",
+                                    ],
+                                    "striatus": [
+                                        "Striated surgeonfish",
+                                        "스트라이에이티드브리슬투스",
+                                    ],
+                                    "truncatus": [
+                                        "Indian gold-ring bristletooth",
+                                        "인디언골드링브리슬투스",
+                                    ],
+                                    "flavicauda": [
+                                        "Yellowtail bristletooth",
+                                        "옐로우테일브리슬투스",
+                                    ],
+                                },
+                                "Prionurus": {
+                                    "laticlavius": [
+                                        "Yellowtail surgeonfish",
+                                        "옐로우테일서전피쉬",
+                                    ],
+                                    "punctatus": [
+                                        "Yellowtail surgeonfish",
+                                        "옐로우테일서전피쉬",
+                                    ],
+                                    "scalprum": [
+                                        "Scalpel sawtail",
+                                        "스칼펠소테일",
+                                    ],
                                 },
                             },
                             "Pomacanthidae": {  # 엔젤피쉬과
@@ -383,6 +498,7 @@ class TaxonomyManager:
                                         "Flame angelfish",
                                         "Flame angel",
                                         "플레임엔젤",
+                                        "플레임",
                                     ],
                                     "argi": [
                                         "Cherub angelfish",
@@ -394,10 +510,11 @@ class TaxonomyManager:
                                         "Red stripe angelfish",
                                         "아이블리엔젤",
                                     ],
-                                    "bispinosus": [
+                                    "bispinosa": [
                                         "Coral beauty",
                                         "Two-spined angelfish",
                                         "코랄뷰티",
+                                        "코랄뷰티엔젤",
                                     ],
                                     "fisheri": [
                                         "Fisher's angelfish",
@@ -434,7 +551,83 @@ class TaxonomyManager:
                                     ],
                                     "vrolikii": [
                                         "Pearlscale angelfish",
+                                        "Half-black angelfish",
                                         "펄스케일엔젤",
+                                        "하프블랙엔젤",
+                                    ],
+                                    "acanthops": [
+                                        "African flameback angelfish",
+                                        "아프리칸플레임백엔젤",
+                                    ],
+                                    "aurantonotus": [
+                                        "Flameback angelfish",
+                                        "플레임백엔젤",
+                                    ],
+
+                                    "colini": [
+                                        "Colin's angelfish",
+                                        "콜린엔젤",
+                                    ],
+                                    "debelius": [
+                                        "Debelius angelfish",
+                                        "데벨리우스엔젤",
+                                    ],
+                                    "ferrugata": [
+                                        "Rusty angelfish",
+                                        "러스티엔젤",
+                                    ],
+                                    "hotumatua": [
+                                        "Easter Island angelfish",
+                                        "이스터아일랜드엔젤",
+                                    ],
+                                    "joculator": [
+                                        "Yellowface angelfish",
+                                        "옐로우페이스엔젤",
+                                    ],
+
+                                    "nahackyi": [
+                                        "Nahacky's angelfish",
+                                        "나하키엔젤",
+                                    ],
+                                    "narcosis": [
+                                        "Narc angelfish",
+                                        "나크엔젤",
+                                    ],
+                                    "shepardi": [
+                                        "Shepard's angelfish",
+                                        "셰파드엔젤",
+                                    ],
+                                    "venusta": [
+                                        "Purple-masked angelfish",
+                                        "퍼플마스크드엔젤",
+                                    ],
+                                    "boylei": [
+                                        "Peppermint angelfish",
+                                        "페퍼민트엔젤",
+                                    ],
+                                    "multibarbus": [
+                                        "Multibar angelfish",
+                                        "멀티바엔젤",
+                                    ],
+                                    "multispinis": [
+                                        "Dusky angelfish",
+                                        "더스키엔젤",
+                                    ],
+                                    "nigriocellus": [
+                                        "Blackspot angelfish",
+                                        "블랙스팟엔젤",
+                                    ],
+                                    "woodheadi": [
+                                        "Woodhead's angelfish",
+                                        "우드헤드엔젤",
+                                    ],
+                                    "abei": [
+                                        "Abe's angelfish",
+                                        "아베엔젤",
+                                    ],
+                                    "aurantia": [
+                                        "Golden angelfish",
+                                        "골든엔젤",
                                     ],
                                 },
                                 "Pomacanthus": {
@@ -481,6 +674,33 @@ class TaxonomyManager:
                                         "Blueface angelfish",
                                         "블루페이스엔젤",
                                     ],
+                                    "zonipectus": [
+                                        "Cortez angelfish",
+                                        "코테즈엔젤",
+                                    ],
+                                    "arcuatus": [
+                                        "Gray angelfish",
+                                        "그레이엔젤",
+                                    ],
+
+                                    "altus": [
+                                        "Deep angelfish",
+                                        "딥엔젤",
+                                    ],
+                                    "griffithsi": [
+                                        "Griffith's angelfish",
+                                        "그리피스엔젤",
+                                    ],
+                                    # rhomboides 항목 중복 제거 (위 정의 삭제)
+                                    "griseus": [
+                                        "Gray angelfish",
+                                        "그레이포마엔젤",
+                                    ],
+                                    "personifer": [
+                                        "Personifer angelfish",
+                                        "퍼소나이퍼엔젤",
+                                    ],
+
                                 },
                                 "Holacanthus": {
                                     "ciliaris": [
@@ -494,6 +714,18 @@ class TaxonomyManager:
                                     "bermudensis": [
                                         "Blue angelfish",
                                         "블루엔젤",
+                                    ],
+                                    "passer": [
+                                        "King angelfish",
+                                        "킹엔젤",
+                                    ],
+                                    "clarionensis": [
+                                        "Clarion angelfish",
+                                        "클라리온엔젤",
+                                    ],
+                                    "limbatus": [
+                                        "Clipperton angelfish",
+                                        "클리퍼톤엔젤",
                                     ],
                                 },
                                 "Genicanthus": {
@@ -513,6 +745,22 @@ class TaxonomyManager:
                                         "Watanabe's angelfish",
                                         "와타나베엔젤",
                                     ],
+                                    "bellus": [
+                                        "Ornate angelfish",
+                                        "오네이트엔젤",
+                                    ],
+                                    "caudovittatus": [
+                                        "Zebra angelfish",
+                                        "제브라엔젤",
+                                    ],
+                                    "personatus": [
+                                        "Masked angelfish",
+                                        "마스크드엔젤",
+                                    ],
+                                    "takeuchii": [
+                                        "Takeuchi's angelfish",
+                                        "타케우치엔젤",
+                                    ],
                                 },
                                 "Apolemichthys": {
                                     "trimaculatus": [
@@ -523,243 +771,301 @@ class TaxonomyManager:
                                         "Indian yellowtail angelfish",
                                         "인디언옐로우테일엔젤",
                                     ],
+                                    "arcuatus": [
+                                        "Banded angelfish",
+                                        "밴디드엔젤",
+                                    ],
+                                    "griffisi": [
+                                        "Griffis angelfish",
+                                        "그리피스엔젤",
+                                    ],
+                                    "kingi": [
+                                        "Tiger angelfish",
+                                        "타이거엔젤",
+                                    ],
+                                    "xanthurus": [
+                                        "Indian smoke angelfish",
+                                        "인디언스모크엔젤",
+                                    ],
+                                },
+                                "Pygoplites": {
+                                    "diacanthus": [
+                                        "Regal angelfish",
+                                        "Royal angelfish",
+                                        "리갈엔젤",
+                                    ],
+                                },
+                                "Chaetodontoplus": {
+                                    "septentrionalis": [
+                                        "Blue-striped angelfish",
+                                        "블루스트라이프엔젤",
+                                    ],
+                                    "mesoleucus": [
+                                        "Vermiculated angelfish",
+                                        "버미큘레이티드엔젤",
+                                    ],
+                                    "melanosoma": [
+                                        "Black-velvet angelfish",
+                                        "블랙벨벳엔젤",
+                                    ],
+                                    "duboulayi": [
+                                        "Scribbled angelfish",
+                                        "스크리블드엔젤",
+                                    ],
+                                    "chrysocephalus": [
+                                        "Orangeface angelfish",
+                                        "오렌지페이스엔젤",
+                                    ],
+                                    "caeruleopunctatus": [
+                                        "Blue-spotted angelfish",
+                                        "블루스팟엔젤",
+                                    ],
+                                    "conspicillatus": [
+                                        "Conspicuous angelfish",
+                                        "컨스피큐어스엔젤",
+                                        "컨스피큘러스엔젤",
+                                    ],
                                 },
                             },
-                            "Pomacentridae": {  # 자리돔과 (클라운피쉬, 댐셀)
-                                "Amphiprion": {
-                                    "ocellaris": [
-                                        "Ocellaris clownfish",
-                                        "False percula clownfish",
-                                        "Common clownfish",
-                                        "오셀라리스",
-                                        "니모",
-                                    ],
-                                    "percula": [
-                                        "Orange clownfish",
-                                        "Percula clownfish",
-                                        "True percula",
-                                        "퍼큘라",
-                                        "트루퍼큘라",
-                                    ],
-                                    "clarkii": [
-                                        "Clark's anemonefish",
-                                        "Yellowtail clownfish",
-                                        "클라키",
-                                    ],
-                                    "frenatus": [
-                                        "Tomato clownfish",
-                                        "Red clownfish",
-                                        "토마토클라운",
-                                    ],
-                                    "melanopus": [
-                                        "Red and black anemonefish",
-                                        "Fire clownfish",
-                                        "파이어클라운",
-                                    ],
-                                    "polymnus": [
-                                        "Saddleback clownfish",
-                                        "White-bonnet anemonefish",
-                                        "새들백클라운",
-                                    ],
-                                    "sebae": ["Sebae clownfish", "세바에클라운"],
-                                    "ephippium": [
-                                        "Red saddleback anemonefish",
-                                        "레드새들백",
-                                    ],
-                                    "chrysopterus": [
-                                        "Orange-fin anemonefish",
-                                        "오렌지핀클라운",
-                                    ],
-                                    "bicinctus": [
-                                        "Two-band anemonefish",
-                                        "투밴드클라운",
-                                    ],
-                                    "akallopisos": [
-                                        "Skunk clownfish",
-                                        "스컹크클라운",
-                                    ],
-                                    "sandaracinos": [
-                                        "Orange skunk clownfish",
-                                        "오렌지스컹크클라운",
-                                    ],
-                                    "nigripes": [
-                                        "Maldive anemonefish",
-                                        "몰디브클라운",
-                                    ],
-                                    "allardi": [
-                                        "Allard's clownfish",
-                                        "알라드클라운",
-                                    ],
-                                    "chrysogaster": [
-                                        "Mauritian anemonefish",
-                                        "모리셔스클라운",
-                                    ],
-                                    "latifasciatus": [
-                                        "Wide-band anemonefish",
-                                        "와이드밴드클라운",
-                                    ],
-                                    "leucokranos": [
-                                        "White-bonnet anemonefish",
-                                        "화이트보넷클라운",
-                                    ],
-                                    "mccullochi": [
-                                        "McCulloch's anemonefish",
-                                        "맥컬록클라운",
-                                    ],
-                                    "omanensis": [
-                                        "Oman anemonefish",
-                                        "오만클라운",
-                                    ],
-                                    "pacificus": [
-                                        "Pacific anemonefish",
-                                        "퍼시픽클라운",
-                                    ],
-                                    "rubrocinctus": [
-                                        "Australian anemonefish",
-                                        "오스트레일리안클라운",
-                                    ],
-                                    "thiellei": [
-                                        "Thielle's anemonefish",
-                                        "티엘레클라운",
-                                    ],
-                                    "tricinctus": [
-                                        "Three-band anemonefish",
-                                        "쓰리밴드클라운",
-                                    ],
+                            "Pomacentridae": {  # 자리돔과
+                                "Amphiprioninae": {  # 흰동가리아과 (클라운피쉬)
+                                    "Amphiprion": {
+                                        "ocellaris": [
+                                            "Ocellaris clownfish",
+                                            "False percula clownfish",
+                                            "Common clownfish",
+                                            "오셀라리스",
+                                            "니모",
+                                        ],
+                                        "percula": [
+                                            "Orange clownfish",
+                                            "Percula clownfish",
+                                            "True percula",
+                                            "퍼큘라",
+                                            "트루퍼큘라",
+                                        ],
+                                        "clarkii": [
+                                            "Clark's anemonefish",
+                                            "Yellowtail clownfish",
+                                            "클라키",
+                                        ],
+                                        "frenatus": [
+                                            "Tomato clownfish",
+                                            "Red clownfish",
+                                            "토마토클라운",
+                                        ],
+                                        "melanopus": [
+                                            "Red and black anemonefish",
+                                            "Fire clownfish",
+                                            "파이어클라운",
+                                        ],
+                                        "polymnus": [
+                                            "Saddleback clownfish",
+                                            "White-bonnet anemonefish",
+                                            "새들백클라운",
+                                        ],
+                                        "sebae": ["Sebae clownfish", "세바에클라운"],
+                                        "ephippium": [
+                                            "Red saddleback anemonefish",
+                                            "레드새들백",
+                                        ],
+                                        "chrysopterus": [
+                                            "Orange-fin anemonefish",
+                                            "오렌지핀클라운",
+                                        ],
+                                        "bicinctus": [
+                                            "Two-band anemonefish",
+                                            "투밴드클라운",
+                                        ],
+                                        "akallopisos": [
+                                            "Skunk clownfish",
+                                            "스컹크클라운",
+                                        ],
+                                        "sandaracinos": [
+                                            "Orange skunk clownfish",
+                                            "오렌지스컹크클라운",
+                                        ],
+                                        "nigripes": [
+                                            "Maldive anemonefish",
+                                            "몰디브클라운",
+                                        ],
+                                        "allardi": [
+                                            "Allard's clownfish",
+                                            "알라드클라운",
+                                        ],
+                                        "chrysogaster": [
+                                            "Mauritian anemonefish",
+                                            "모리셔스클라운",
+                                        ],
+                                        "latifasciatus": [
+                                            "Wide-band anemonefish",
+                                            "와이드밴드클라운",
+                                        ],
+                                        "leucokranos": [
+                                            "White-bonnet anemonefish",
+                                            "화이트보넷클라운",
+                                        ],
+                                        "mccullochi": [
+                                            "McCulloch's anemonefish",
+                                            "맥컬록클라운",
+                                        ],
+                                        "omanensis": [
+                                            "Oman anemonefish",
+                                            "오만클라운",
+                                        ],
+                                        "pacificus": [
+                                            "Pacific anemonefish",
+                                            "퍼시픽클라운",
+                                        ],
+                                        "rubrocinctus": [
+                                            "Australian anemonefish",
+                                            "오스트레일리안클라운",
+                                        ],
+                                        "thiellei": [
+                                            "Thielle's anemonefish",
+                                            "티엘레클라운",
+                                        ],
+                                        "tricinctus": [
+                                            "Three-band anemonefish",
+                                            "쓰리밴드클라운",
+                                        ],
+                                    },
+                                    "Premnas": {
+                                        "biaculeatus": [
+                                            "Maroon clownfish",
+                                            "Spine-cheek anemonefish",
+                                            "마룬클라운",
+                                        ]
+                                    },
                                 },
-                                "Premnas": {
-                                    "biaculeatus": [
-                                        "Maroon clownfish",
-                                        "Spine-cheek anemonefish",
-                                        "마룬클라운",
-                                    ]
-                                },
-                                "Chromis": {
-                                    "viridis": [
-                                        "Blue-green chromis",
-                                        "Green chromis",
-                                        "그린크로미스",
-                                    ],
-                                    "cyanea": [
-                                        "Blue reef chromis",
-                                        "Blue chromis",
-                                        "블루크로미스",
-                                    ],
-                                    "atripectoralis": [
-                                        "Black-axil chromis",
-                                        "Blackfin chromis",
-                                        "블랙핀크로미스",
-                                    ],
-                                    "vanderbilti": [
-                                        "Vanderbilt's chromis",
-                                        "반더빌트크로미스",
-                                    ],
-                                    "margaritifer": [
-                                        "Bicolor chromis",
-                                        "바이컬러크로미스",
-                                    ],
-                                    "dimidiata": [
-                                        "Half and half chromis",
-                                        "하프앤하프크로미스",
-                                    ],
-                                    "iomelas": [
-                                        "Half and half chromis",
-                                        "하프앤하프크로미스",
-                                    ],
-                                    "lepidolepis": [
-                                        "Scaly chromis",
-                                        "스케일리크로미스",
-                                    ],
-                                    "retrofasciata": [
-                                        "Black-bar chromis",
-                                        "블랙바크로미스",
-                                    ],
-                                    "weberi": [
-                                        "Weber's chromis",
-                                        "웨버크로미스",
-                                    ],
-                                },
-                                "Dascyllus": {
-                                    "trimaculatus": [
-                                        "Three-spot dascyllus",
-                                        "Domino damsel",
-                                        "도미노댐셀",
-                                    ],
-                                    "aruanus": [
-                                        "White-tailed dascyllus",
-                                        "Humbug dascyllus",
-                                        "험버그댐셀",
-                                    ],
-                                    "melanurus": [
-                                        "Four-stripe damselfish",
-                                        "Blacktail dascyllus",
-                                        "블랙테일댐셀",
-                                    ],
-                                    "carneus": [
-                                        "Cloudy dascyllus",
-                                        "클라우디댐셀",
-                                    ],
-                                    "reticulatus": [
-                                        "Reticulate dascyllus",
-                                        "레티큘레이트댐셀",
-                                    ],
-                                },
-                                "Chrysiptera": {
-                                    "cyanea": [
-                                        "Blue devil",
-                                        "Sapphire devil",
-                                        "블루데빌",
-                                    ],
-                                    "parasema": [
-                                        "Yellowtail blue damsel",
-                                        "옐로우테일블루댐셀",
-                                    ],
-                                    "hemicyanea": [
-                                        "Azure damselfish",
-                                        "애저댐셀",
-                                    ],
-                                    "springeri": [
-                                        "Springer's demoiselle",
-                                        "스프링거댐셀",
-                                    ],
-                                    "talboti": [
-                                        "Talbot's demoiselle",
-                                        "탈봇댐셀",
-                                    ],
-                                },
-                                "Amblyglyphidodon": {
-                                    "curacao": [
-                                        "Staghorn damselfish",
-                                        "스태그혼댐셀",
-                                    ],
-                                    "leucogaster": [
-                                        "Yellowbelly damselfish",
-                                        "옐로우벨리댐셀",
-                                    ],
-                                },
-                                "Neoglyphidodon": {
-                                    "oxyodon": [
-                                        "Neon velvet damsel",
-                                        "네온벨벳댐셀",
-                                    ],
-                                    "melas": [
-                                        "Bowtie damselfish",
-                                        "보우타이댐셀",
-                                    ],
-                                },
-                                "Pomacentrus": {
-                                    "coelestis": [
-                                        "Neon damselfish",
-                                        "네온댐셀",
-                                    ],
-                                    "pavo": [
-                                        "Sapphire damsel",
-                                        "사파이어댐셀",
-                                    ],
-                                    "alleni": [
-                                        "Andaman damsel",
-                                        "안다만댐셀",
-                                    ],
+                                "Pomacentrinae": {  # 자리돔아과 (댐셀피쉬, 크로미스)
+                                    "Chromis": {
+                                        "viridis": [
+                                            "Blue-green chromis",
+                                            "Green chromis",
+                                            "그린크로미스",
+                                        ],
+                                        "cyanea": [
+                                            "Blue reef chromis",
+                                            "Blue chromis",
+                                            "블루크로미스",
+                                        ],
+                                        "atripectoralis": [
+                                            "Black-axil chromis",
+                                            "Blackfin chromis",
+                                            "블랙핀크로미스",
+                                        ],
+                                        "vanderbilti": [
+                                            "Vanderbilt's chromis",
+                                            "반더빌트크로미스",
+                                        ],
+                                        "margaritifer": [
+                                            "Bicolor chromis",
+                                            "바이컬러크로미스",
+                                        ],
+                                        "dimidiata": [
+                                            "Half and half chromis",
+                                            "하프앤하프크로미스",
+                                        ],
+                                        "iomelas": [
+                                            "Half and half chromis",
+                                            "하프앤하프크로미스",
+                                        ],
+                                        "lepidolepis": [
+                                            "Scaly chromis",
+                                            "스케일리크로미스",
+                                        ],
+                                        "retrofasciata": [
+                                            "Black-bar chromis",
+                                            "블랙바크로미스",
+                                        ],
+                                        "weberi": [
+                                            "Weber's chromis",
+                                            "웨버크로미스",
+                                        ],
+                                    },
+                                    "Dascyllus": {
+                                        "trimaculatus": [
+                                            "Three-spot dascyllus",
+                                            "Domino damsel",
+                                            "도미노댐셀",
+                                        ],
+                                        "aruanus": [
+                                            "White-tailed dascyllus",
+                                            "Humbug dascyllus",
+                                            "험버그댐셀",
+                                        ],
+                                        "melanurus": [
+                                            "Four-stripe damselfish",
+                                            "Blacktail dascyllus",
+                                            "블랙테일댐셀",
+                                        ],
+                                        "carneus": [
+                                            "Cloudy dascyllus",
+                                            "클라우디댐셀",
+                                        ],
+                                        "reticulatus": [
+                                            "Reticulate dascyllus",
+                                            "레티큘레이트댐셀",
+                                        ],
+                                    },
+                                    "Chrysiptera": {
+                                        "cyanea": [
+                                            "Blue devil",
+                                            "Sapphire devil",
+                                            "블루데빌",
+                                        ],
+                                        "parasema": [
+                                            "Yellowtail blue damsel",
+                                            "옐로우테일블루댐셀",
+                                        ],
+                                        "hemicyanea": [
+                                            "Azure damselfish",
+                                            "애저댐셀",
+                                        ],
+                                        "springeri": [
+                                            "Springer's demoiselle",
+                                            "스프링거댐셀",
+                                        ],
+                                        "talboti": [
+                                            "Talbot's demoiselle",
+                                            "탈봇댐셀",
+                                        ],
+                                    },
+                                    "Amblyglyphidodon": {
+                                        "curacao": [
+                                            "Staghorn damselfish",
+                                            "스태그혼댐셀",
+                                        ],
+                                        "leucogaster": [
+                                            "Yellowbelly damselfish",
+                                            "옐로우벨리댐셀",
+                                        ],
+                                    },
+                                    "Neoglyphidodon": {
+                                        "oxyodon": [
+                                            "Neon velvet damsel",
+                                            "네온벨벳댐셀",
+                                        ],
+                                        "melas": [
+                                            "Bowtie damselfish",
+                                            "보우타이댐셀",
+                                        ],
+                                    },
+                                    "Pomacentrus": {
+                                        "coelestis": [
+                                            "Neon damselfish",
+                                            "네온댐셀",
+                                        ],
+                                        "pavo": [
+                                            "Sapphire damsel",
+                                            "사파이어댐셀",
+                                        ],
+                                        "alleni": [
+                                            "Andaman damsel",
+                                            "안다만댐셀",
+                                        ],
+                                    },
                                 },
                             },
                             "Chaetodontidae": {  # 나비고기과
@@ -986,10 +1292,6 @@ class TaxonomyManager:
                                         "Black-spotted butterflyfish",
                                         "블랙스팟버터플라이",
                                     ],
-                                    "zoster": [
-                                        "Zoster butterflyfish",
-                                        "조스터버터플라이",
-                                    ],
                                     "declivis": [
                                         "Marquesas butterflyfish",
                                         "데클라비스버터플라이",
@@ -1010,10 +1312,6 @@ class TaxonomyManager:
                                     "capistratus": [
                                         "Foureye butterflyfish",
                                         "포아이버터플라이",
-                                    ],
-                                    "chrysurus": [
-                                        "Pearlscale butterflyfish",
-                                        "펄스케일버터플라이",
                                     ],
                                     "daedalma": [
                                         "Wrought iron butterflyfish",
@@ -1162,6 +1460,11 @@ class TaxonomyManager:
                                         "Hawaiian cleaner wrasse",
                                         "하와이안클리너",
                                     ],
+                                    # 자주 수입되는 추가 클리너랩스 (필요 시 확장 가능)
+                                    # "terralabroides": [
+                                    #     "Red Sea cleaner wrasse",
+                                    #     "레드씨클리너",
+                                    # ],  # 확인 후 활성화
                                 },
                                 "Thalassoma": {
                                     "bifasciatum": [
@@ -1189,6 +1492,15 @@ class TaxonomyManager:
                                         "Five-stripe wrasse",
                                         "파이브스트라이프놀래기",
                                     ],
+                                    # 추가로 수입되는 종류
+                                    "purpureum": [
+                                        "Surge wrasse",
+                                        "서지놀래기",
+                                    ],
+                                    "rueppellii": [
+                                        "Red Sea wrasse",
+                                        "레드씨놀래기",
+                                    ],
                                 },
                                 "Pseudocheilinus": {
                                     "hexataenia": [
@@ -1206,6 +1518,10 @@ class TaxonomyManager:
                                     "ocellatus": [
                                         "Mystery wrasse",
                                         "미스터리놀래기",
+                                    ],
+                                    "dispar": [
+                                        "Dispar wrasse",
+                                        "디스파놀래기",
                                     ],
                                 },
                                 "Cirrhilabrus": {
@@ -1233,6 +1549,57 @@ class TaxonomyManager:
                                         "Social fairy wrasse",
                                         "소셜페어리",
                                     ],
+                                    "rubeus": [
+                                        "Red velvet fairy wrasse",
+                                        "Ruby fairy wrasse",
+                                        "레드벨벳페어리",
+                                        "루비페어리",
+                                    ],
+                                    "lanceolatus": [
+                                        "Lanceolate fairy wrasse",
+                                        "랜스올레이트페어리",
+                                    ],
+                                    "solorensis": [
+                                        "Red-headed fairy wrasse",
+                                        "레드헤드페어리",
+                                    ],
+                                    "jordani": [
+                                        "Jordan's fairy wrasse",
+                                        "조던페어리",
+                                    ],
+                                    "temminckii": [
+                                        "Temminck's fairy wrasse",
+                                        "템민크페어리",
+                                    ],
+                                    "punctatus": [
+                                        "Fine-spotted fairy wrasse",
+                                        "파인스팟페어리",
+                                    ],
+                                    "rhomboidalis": [
+                                        "Rhomboid fairy wrasse",
+                                        "롬보이드페어리",
+                                    ],
+                                    "katherinae": [
+                                        "Katherine's fairy wrasse",
+                                        "캐서린페어리",
+                                    ],
+                                    # 추가 인기 페어리 래스
+                                    "naokoae": [
+                                        "Naoko's fairy wrasse",
+                                        "나오코페어리",
+                                    ],
+                                    "rubrisquamis": [
+                                        "Red velvet scaled fairy wrasse",
+                                        "레드벨벳스케일드페어리",
+                                    ],
+                                    "condei": [
+                                        "Conde's fairy wrasse",
+                                        "콘데이페어리",
+                                    ],
+                                    "finifenmaa": [
+                                        "Rose-veiled fairy wrasse",
+                                        "로즈베일드페어리",
+                                    ],
                                 },
                                 "Paracheilinus": {
                                     "carpenteri": [
@@ -1246,6 +1613,35 @@ class TaxonomyManager:
                                     "mccoskeri": [
                                         "McCosker's flasher wrasse",
                                         "맥코스커플래셔",
+                                    ],
+                                    "angulatus": [
+                                        "Angular flasher wrasse",
+                                        "앵귤러플래셔",
+                                    ],
+                                    "attenuatus": [
+                                        "Attenuate flasher wrasse",
+                                        "어테뉴에이트플래셔",
+                                    ],
+                                    "octotaenia": [
+                                        "Eight-line flasher wrasse",
+                                        "에잇라인플래셔",
+                                    ],
+                                    # 추가 플래셔 래스
+                                    "flavianalis": [
+                                        "Yellowfin flasher wrasse",
+                                        "옐로우핀플래셔",
+                                    ],
+                                    "lineopunctatus": [
+                                        "Linespot flasher wrasse",
+                                        "라인스팟플래셔",
+                                    ],
+                                    "rubricaudalis": [
+                                        "Red-tailed flasher wrasse",
+                                        "레드테일플래셔",
+                                    ],
+                                    "cyaneus": [
+                                        "Blue flasher wrasse",
+                                        "블루플래셔",
                                     ],
                                 },
                                 "Halichoeres": {
@@ -1265,6 +1661,31 @@ class TaxonomyManager:
                                         "Ornate wrasse",
                                         "오네이트놀래기",
                                     ],
+                                    "iridis": [
+                                        "Radiant wrasse",
+                                        "래디언트놀래기",
+                                    ],
+                                    "leucoxanthus": [
+                                        "Canarytop wrasse",
+                                        "카나리탑놀래기",
+                                    ],
+                                    "trispilus": [
+                                        "Three-spot wrasse",
+                                        "쓰리스팟놀래기",
+                                    ],
+                                    # 추가로 자주 유통되는 할리코에레스
+                                    "hortulanus": [
+                                        "Checkerboard wrasse",
+                                        "체커보드놀래기",
+                                    ],
+                                    "biocellatus": [
+                                        "Red-lined wrasse",
+                                        "레드라인드놀래기",
+                                    ],
+                                    "cosmetus": [
+                                        "Adorned wrasse",
+                                        "어도른드놀래기",
+                                    ],
                                 },
                                 "Coris": {
                                     "gaimard": [
@@ -1283,13 +1704,56 @@ class TaxonomyManager:
                                         "Mediterranean rainbow wrasse",
                                         "메디터레니안레인보우",
                                     ],
+                                    # 추가 Coris 속
+                                    "picta": [
+                                        "African coris",
+                                        "아프리칸코리스",
+                                    ],
+                                    "vexillifer": [
+                                        "Bicolor coris",
+                                        "바이컬러코리스",
+                                    ],
                                 },
                                 "Novaculichthys": {
                                     "taeniourus": [
                                         "Rockmover wrasse",
                                         "Dragon wrasse",
                                         "드래곤놀래기",
-                                        "나오코래스",
+                                    ],
+                                },
+                                "Pseudojuloides": {
+                                    # Cirrhilabrus naokoae 가 올바른 분류
+                                    # Pseudojuloides 속에 naokoae 없음. (중복/오류 제거)
+                                    "severnsi": [
+                                        "Severn's wrasse",
+                                        "서번스놀래기",
+                                    ],
+                                },
+                                # Macropharyngodon 중복 블록 통합 및 확장
+                                "Macropharyngodon": {
+                                    "meleagris": [
+                                        "Leopard wrasse",
+                                        "레오파드놀래기",
+                                    ],
+                                    "bipartitus": [
+                                        "Divided wrasse",
+                                        "디바이디드놀래기",
+                                    ],
+                                    "ornatus": [
+                                        "Ornate leopard wrasse",
+                                        "오네이트레오파드놀래기",
+                                    ],
+                                    "negrosensis": [
+                                        "Yellow-spotted leopard wrasse",
+                                        "옐로우스팟레오파드놀래기",
+                                    ],
+                                    "choati": [
+                                        "Choat's leopard wrasse",
+                                        "초아티레오파드놀래기",
+                                    ],
+                                    "kuiteri": [
+                                        "Kuiter's leopard wrasse",
+                                        "쿠이테리레오파드놀래기",
                                     ],
                                 },
                                 "Bodianus": {
@@ -1309,6 +1773,19 @@ class TaxonomyManager:
                                         "Coral hogfish",
                                         "코랄호그피쉬",
                                     ],
+                                    # 추가 호그피쉬
+                                    "mesothorax": [
+                                        "Split-level hogfish",
+                                        "스플릿레벨호그피쉬",
+                                    ],
+                                    "bimaculatus": [
+                                        "Twinspot hogfish",
+                                        "트윈스팟호그피쉬",
+                                    ],
+                                    "sepiacaudus": [
+                                        "Candy cane hogfish",
+                                        "캔디케인호그피쉬",
+                                    ],
                                 },
                                 "Anampses": {
                                     "meleagrides": [
@@ -1319,15 +1796,14 @@ class TaxonomyManager:
                                         "Psychedelic wrasse",
                                         "사이키델릭놀래기",
                                     ],
-                                },
-                                "Macropharyngodon": {
-                                    "meleagris": [
-                                        "Leopard wrasse",
-                                        "레오파드놀래기",
+                                    # 추가 타마린 래스
+                                    "femininus": [
+                                        "Blue-stripe tamarin wrasse",
+                                        "블루스트라이프타마린",
                                     ],
-                                    "negrosensis": [
-                                        "Yellow-spotted wrasse",
-                                        "옐로우스팟놀래기",
+                                    "lennardi": [
+                                        "Lennard's wrasse",
+                                        "레나드놀래기",
                                     ],
                                 },
                                 "Stethojulis": {
@@ -1339,6 +1815,7 @@ class TaxonomyManager:
                                         "Three-ribbon wrasse",
                                         "쓰리리본놀래기",
                                     ],
+                                    # 필요시 추가 가능
                                 },
                             },
                             "Apogonidae": {  # 천축어과 (카디널피쉬)
@@ -1358,47 +1835,13 @@ class TaxonomyManager:
                                         "방가이카디널",
                                     ]
                                 },
+                                # 재분류 참고: 과거 다수 종이
+                                # Ostorhinchus / Zoramia / Taeniamia 로 이동
+                                # Apogon 는 유통상 Flamefish (A. maculatus) 위주
                                 "Apogon": {
-                                    "maculatus": ["Flamefish", "플레임피쉬"],
-                                    "cyanosoma": [
-                                        "Yellow-striped cardinalfish",
-                                        "옐로우스트라이프카디널",
-                                    ],
-                                    "leptacanthus": [
-                                        "Threadfin cardinalfish",
-                                        "쓰레드핀카디널",
-                                    ],
-                                    "compressus": [
-                                        "Ochre-striped cardinalfish",
-                                        "오커스트라이프카디널",
-                                    ],
-                                    "aureus": [
-                                        "Ring-tailed cardinalfish",
-                                        "링테일카디널",
-                                    ],
-                                    "angustatus": [
-                                        "Broad-striped cardinalfish",
-                                        "브로드스트라이프카디널",
-                                    ],
-                                    "cookii": [
-                                        "Cook's cardinalfish",
-                                        "쿡카디널",
-                                    ],
-                                    "doederleini": [
-                                        "Doederlein's cardinalfish",
-                                        "되덜라인카디널",
-                                    ],
-                                    "exostigma": [
-                                        "Narrowstripe cardinalfish",
-                                        "내로우스트라이프카디널",
-                                    ],
-                                    "fragilis": [
-                                        "Fragile cardinalfish",
-                                        "프래질카디널",
-                                    ],
-                                    "hartzfeldii": [
-                                        "Hartzfeld's cardinalfish",
-                                        "하츠펠드카디널",
+                                    "maculatus": [
+                                        "Flamefish",
+                                        "플레임피쉬",
                                     ],
                                 },
                                 "Cheilodipterus": {
@@ -1424,10 +1867,6 @@ class TaxonomyManager:
                                         "Broad-striped cardinalfish",
                                         "브로드스트라이프카디널",
                                     ],
-                                    "apogonoides": [
-                                        "Short-tooth cardinal",
-                                        "쇼트투스카디널",
-                                    ],
                                     "aureus": [
                                         "Ring-tailed cardinalfish",
                                         "링테일카디널",
@@ -1448,6 +1887,30 @@ class TaxonomyManager:
                                         "Doederlein's cardinalfish",
                                         "되덜라인카디널",
                                     ],
+                                    "compressus": [
+                                        "Ochre-striped cardinalfish",
+                                        "오커스트라이프카디널",
+                                    ],
+                                    "cookii": [
+                                        "Cook's cardinalfish",
+                                        "쿡카디널",
+                                    ],
+                                    "exostigma": [
+                                        "Narrowstripe cardinalfish",
+                                        "내로우스트라이프카디널",
+                                    ],
+                                    "hartzfeldii": [
+                                        "Hartzfeld's cardinalfish",
+                                        "하츠펠드카디널",
+                                    ],
+                                    "parvulus": [
+                                        "Redspot cardinalfish",
+                                        "레드스팟카디널",
+                                    ],
+                                    "apogonoides": [
+                                        "Short-tooth cardinal",
+                                        "쇼트투스카디널",
+                                    ],
                                     "fleurieu": [
                                         "Cardinalfish",
                                         "카디널피쉬",
@@ -1467,6 +1930,31 @@ class TaxonomyManager:
                                         "프래질카디널",
                                     ],
                                 },
+                                "Taeniamia": {
+                                    "zosterophora": [
+                                        "Zoster cardinalfish",
+                                        "조스터카디널",
+                                    ],
+                                },
+                                "Rhabdamia": {
+                                    "gracilis": [
+                                        "Longspine cardinalfish",
+                                        "롱스파인카디널",
+                                    ],
+                                },
+                                "Pristiapogon": {
+                                    "fraenatus": [
+                                        "Bridled cardinalfish",
+                                        "브라이들드카디널",
+                                    ],
+                                },
+                                # 선택적(드물게 유통) - 필요 시 주석 해제
+                                # "Apogonichthyoides": {
+                                #     "melas": [
+                                #         "Black cardinalfish",
+                                #         "블랙카디널",
+                                #     ],
+                                # },
                             },
                         },
                         "Blenniiformes": {  # 블레니목
@@ -1566,6 +2054,19 @@ class TaxonomyManager:
                                         "Tail-spot combtooth blenny",
                                         "테일스팟블레니",
                                     ],
+                                    # 추가 자주 유통
+                                    "springeri": [
+                                        "Springer's combtooth blenny",
+                                        "스프링거블레니",
+                                    ],
+                                    "tricolor": [
+                                        "Tricolor blenny",
+                                        "트라이컬러블레니",
+                                    ],
+                                    "prosopotaenia": [
+                                        "Banded blenny",
+                                        "밴디드블레니",
+                                    ],
                                 },
                                 "Salarias": {
                                     "fasciatus": [
@@ -1594,7 +2095,12 @@ class TaxonomyManager:
                                     "fuscus": [
                                         "Brown coral blenny",
                                         "브라운코랄블레니",
-                                    ]
+                                    ],
+                                    # Added
+                                    "holomelas": [
+                                        "Black blenny",
+                                        "블랙블레니",
+                                    ],
                                 },
                                 "Blenniella": {
                                     "bilitonensis": [
@@ -1643,6 +2149,20 @@ class TaxonomyManager:
                                         "Red-speckled blenny",
                                         "레드스펙클드블레니",
                                     ],
+                                },
+                                # 산호 식해 위험, 주의 필요
+                                "Exallias": {
+                                    "brevis": [
+                                        "Leopard blenny",
+                                        "레오파드블레니",
+                                    ]
+                                },
+                                # 모방/물기 이슈, 주의
+                                "Plagiotremus": {
+                                    "rhinorhynchos": [
+                                        "Bluestriped fangblenny",
+                                        "블루스트라이프팽블레니",
+                                    ]
                                 },
                             },
                             "Chaenopsidae": {  # 파이크블레니과
@@ -1747,6 +2267,15 @@ class TaxonomyManager:
                                     "stellatus": [
                                         "Starry puffer",
                                         "스타리퍼퍼",
+                                        # Takifugu niphobles 도 같은 통칭 사용 → 주의
+                                    ],
+                                    "reticularis": [
+                                        "Reticulated puffer",
+                                        "레티큘레이티드퍼퍼",
+                                    ],
+                                    "manilensis": [
+                                        "Narrow-lined puffer",
+                                        "내로우라인드퍼퍼",
                                     ],
                                 },
                                 "Canthigaster": {
@@ -1776,11 +2305,21 @@ class TaxonomyManager:
                                         "Caribbean sharpnose-puffer",
                                         "카리비안샤프노즈퍼퍼",
                                     ],
+                                    # 자주 유통 추가
+                                    "amboinensis": [
+                                        "Ambon toby",
+                                        "암본토비",
+                                    ],
+                                    "epilampra": [
+                                        "Lantern toby",
+                                        "랜턴토비",
+                                    ],
                                 },
                                 "Takifugu": {
                                     "niphobles": [
                                         "Starry puffer",
                                         "스타리퍼퍼",
+                                        # Arothron stellatus 와 공명
                                     ]
                                 },
                             },
@@ -1903,6 +2442,10 @@ class TaxonomyManager:
                                         "Honeycomb filefish",
                                         "허니콤파일피쉬",
                                     ],
+                                    "macrocerus": [
+                                        "Orange filefish",
+                                        "오렌지파일피쉬",
+                                    ],
                                 },
                             },
                             "Ostraciidae": {  # 상자고기과 (박스피쉬)
@@ -2005,6 +2548,10 @@ class TaxonomyManager:
                                     "Sixspot goby",
                                     "식스스팟고비",
                                 ],
+                                "wardi": [
+                                    "Ward's sleeper goby",
+                                    "워즈슬리퍼고비",
+                                ],
                             },
                             "Cryptocentrus": {
                                 "cinctus": [
@@ -2015,6 +2562,10 @@ class TaxonomyManager:
                                     "Blue-spotted watchman goby",
                                     "블루스팟와치맨고비",
                                 ],
+                                "leptocephalus": [
+                                    "Pink-speckled watchman goby",
+                                    "핑크스페클드와치맨",
+                                ],
                             },
                             "Amblyeleotris": {
                                 "steinitzi": [
@@ -2024,6 +2575,14 @@ class TaxonomyManager:
                                 "wheeleri": [
                                     "Wheeler's shrimp goby",
                                     "휠러쉬림프고비",
+                                ],
+                                "randalli": [
+                                    "Randall's shrimp goby",
+                                    "랜달쉬림프고비",
+                                ],
+                                "aurora": [
+                                    "Pinkbar goby",
+                                    "핑크바고비",
                                 ],
                             },
                             "Elacatinus": {
@@ -2037,6 +2596,26 @@ class TaxonomyManager:
                                     "Sharknose goby",
                                     "샤크노즈고비",
                                 ]
+                            },
+                            "Stonogobiops": {
+                                "nematodes": [
+                                    "Hi-fin red banded goby",
+                                    "하이핀레드밴디드고비",
+                                ],
+                                "yasha": [
+                                    "Yasha goby",
+                                    "야샤고비",
+                                ],
+                            },
+                            "Koumansetta": {
+                                "rainfordi": [
+                                    "Rainford's goby",
+                                    "레인포드고비",
+                                ],
+                                "hectori": [
+                                    "Hector's goby",
+                                    "헥터고비",
+                                ],
                             },
                         },
                         "Callionymidae": {  # 드래고넷과
@@ -2164,6 +2743,14 @@ class TaxonomyManager:
                                     "Barbour's seahorse",
                                     "바버해마",
                                 ],
+                                "comes": [
+                                    "Tiger tail seahorse",
+                                    "타이거테일해마",
+                                ],
+                                "zosterae": [
+                                    "Dwarf seahorse",
+                                    "드워프해마",
+                                ],
                             },
                             "Syngnathus": {
                                 "scovelli": [
@@ -2179,6 +2766,20 @@ class TaxonomyManager:
                                 "dactyliophorus": [
                                     "Banded pipefish",
                                     "밴디드파이프피쉬",
+                                ],
+                                "baliensis": [
+                                    "Bali bluestripe pipefish",
+                                    "발리블루스트라이프",
+                                ],
+                            },
+                            "Corythoichthys": {
+                                "haematopterus": [
+                                    "Messmate pipefish",
+                                    "메스메이트파이프피쉬",
+                                ],
+                                "intestinalis": [
+                                    "Broad-banded pipefish",
+                                    "브로드밴디드파이프피쉬",
                                 ],
                             },
                         }
@@ -2333,9 +2934,17 @@ class TaxonomyManager:
                                     "Yellow-edged moray",
                                     "옐로우에지드모레이",
                                 ],
-                                "zebra": [
-                                    "Zebra moray",
-                                    "제브라모레이",
+                                "undulatus": [
+                                    "Undulated moray",
+                                    "언둘레이티드모레이",
+                                ],
+                                "javanicus": [
+                                    "Giant moray",
+                                    "자이언트모레이",
+                                ],
+                                "melatremus": [
+                                    "Golden dwarf moray",
+                                    "골든드워프모레이",
                                 ],
                             },
                             "Rhinomuraena": {
@@ -2350,6 +2959,13 @@ class TaxonomyManager:
                                     "스노우플레이크모레이",
                                 ]
                             },
+                            # Gymnomuraena zebra 유지 (Gymnothorax 중복 제거)
+                            "Gymnomuraena": {
+                                "zebra": [
+                                    "Zebra moray",
+                                    "제브라모레이",
+                                ]
+                            },
                         },
                         "Ophichthidae": {  # 뱀장어과
                             "Myrichthys": {
@@ -2359,6 +2975,33 @@ class TaxonomyManager:
                                 ]
                             }
                         },
+                    },
+                    "Pleuronectiformes": {  # 가자미목 (일부 관상용 플랫피쉬)
+                        "Bothidae": {  # 넙치과 (Left-eyed flounders)
+                            "Bothus": {
+                                "lunatus": [
+                                    "Peacock flounder",
+                                    "피콕플라운더",
+                                ]
+                            }
+                        },
+                        "Paralichthyidae": {  # 넙칫과 (Sand flounders)
+                            "Paralichthys": {
+                                "olivaceus": [
+                                    "Olive flounder",
+                                    "올리브플라운더",
+                                ]
+                            }
+                        },
+                        "Soleidae": {  # 넙치목 솔레
+                            "Zebrias": {
+                                "fasciatus": [
+                                    "Zebra sole",
+                                    "제브라솔",
+                                ]
+                            }
+                        },
+                        # 주의: 다수 가자미류는 대형/식용 위주이므로 최소 대표종만 포함
                     },
                     "Lophiiformes": {  # 아귀목
                         "Antennariidae": {  # 아귀과 (프로그피쉬)
@@ -2427,33 +3070,68 @@ class TaxonomyManager:
             osteichthyes = self.fish_taxonomy.get("Osteichthyes", {})
             actinopterygii = osteichthyes.get("Actinopterygii", {})
 
-            for superorder_name, superorder_data in actinopterygii.items():
-                if not isinstance(superorder_data, dict):
-                    continue
-                for order_name, order_data in superorder_data.items():
-                    if not isinstance(order_data, dict):
-                        continue
-                    for family_name, family_data in order_data.items():
-                        if not isinstance(family_data, dict):
-                            continue
-                        for genus_name, genus_data in family_data.items():
-                            if not isinstance(genus_data, dict):
-                                continue
-                            for species_name, common_names in genus_data.items():
-                                if isinstance(common_names, list):
-                                    species_info = SpeciesInfo(
-                                        genus=genus_name,
-                                        species=species_name,
-                                        common_names=common_names,
-                                        family=family_name,
-                                        order=order_name,
-                                        class_name="Osteichthyes",
-                                    )
-                                    self._add_to_indexes(species_info)
+            # 재귀적으로 모든 레벨 처리
+            self._process_osteichthyes_data(actinopterygii, "Osteichthyes")
+            
         except Exception as e:
             self.logger.error(f"Osteichthyes 인덱스 생성 오류: {e}")
 
         self.logger.info(f"분류 체계 인덱스 생성 완료: {len(self.species_index)}종")
+
+    def _process_osteichthyes_data(self, data, class_name):
+        """Osteichthyes 데이터 재귀 처리"""
+        for key, value in data.items():
+            if not isinstance(value, dict):
+                continue
+            
+            # 목(order)인지 확인 (형태소 'formes'로 끝남)
+            if key.endswith('formes'):
+                order_name = key
+                order_data = value
+                # 목 아래의 과들 처리
+                for family_name, family_data in order_data.items():
+                    if isinstance(family_data, dict):
+                        self._process_family_data(
+                            family_data,
+                            family_name,
+                            order_name,
+                            class_name,
+                        )
+            else:
+                # 상목이나 다른 분류 단위 - 재귀적으로 처리
+                self._process_osteichthyes_data(value, class_name)
+
+    def _process_family_data(
+        self, family_data, family_name, order_name, class_name
+    ):
+        """과 데이터 처리 (아과 구조 지원)"""
+        for key, value in family_data.items():
+            if not isinstance(value, dict):
+                continue
+            
+            # 아과인지 속인지 판단
+            # 아과는 보통 'inae'로 끝나고, 그 안에 속들이 있음
+            if key.endswith('inae'):
+                # 아과 구조 - 재귀적으로 처리
+                self._process_family_data(
+                    value, family_name, order_name, class_name
+                )
+            else:
+                # 속 구조 - 직접 처리
+                genus_name = key
+                genus_data = value
+                if isinstance(genus_data, dict):
+                    for species_name, common_names in genus_data.items():
+                        if isinstance(common_names, list):
+                            species_info = SpeciesInfo(
+                                genus=genus_name,
+                                species=species_name,
+                                common_names=common_names,
+                                family=family_name,
+                                order=order_name,
+                                class_name=class_name,
+                            )
+                            self._add_to_indexes(species_info)
 
     def _add_to_indexes(self, species_info: SpeciesInfo):
         """종 정보를 인덱스에 추가"""
@@ -2478,7 +3156,9 @@ class TaxonomyManager:
                 self.common_name_index[common_lower] = []
             self.common_name_index[common_lower].append(species_info)
 
-    def get_species_info(self, genus: str, species: str) -> Optional[SpeciesInfo]:
+    def get_species_info(
+        self, genus: str, species: str
+    ) -> Optional[SpeciesInfo]:
         """종 정보 조회"""
         scientific_name = f"{genus} {species}"
         return self.species_index.get(scientific_name)
@@ -2524,21 +3204,19 @@ class TaxonomyManager:
             if isinstance(order_data, dict):
                 for family_name, family_data in order_data.items():
                     if isinstance(family_data, dict):
-                        families.append(("Chondrichthyes", order_name, family_name))
+                        families.append(
+                            ("Chondrichthyes", order_name, family_name)
+                        )
 
-        # Osteichthyes 처리
-        osteichthyes = self.fish_taxonomy.get("Osteichthyes", {})
-        actinopterygii = osteichthyes.get("Actinopterygii", {})
-
-        for superorder_name, superorder_data in actinopterygii.items():
-            if isinstance(superorder_data, dict):
-                for order_name, order_data in superorder_data.items():
-                    if isinstance(order_data, dict):
-                        for family_name, family_data in order_data.items():
-                            if isinstance(family_data, dict):
-                                families.append(
-                                    ("Osteichthyes", order_name, family_name)
-                                )
+        # Osteichthyes 처리 - 실제 family들만 추출
+        families_set = set()
+        for species_info in self.species_index.values():
+            if species_info.class_name == "Osteichthyes":
+                family_tuple = (species_info.class_name, species_info.order, species_info.family)
+                families_set.add(family_tuple)
+        
+        families.extend(sorted(families_set))
+        return families
 
         return families
 
