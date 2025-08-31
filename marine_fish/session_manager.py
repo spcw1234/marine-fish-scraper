@@ -9,8 +9,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional, Any
 from dataclasses import dataclass, asdict
-from logger import get_logger
-from taxonomy_manager import SpeciesInfo
+from .logger import get_logger
+from .taxonomy_manager import SpeciesInfo
 
 
 @dataclass

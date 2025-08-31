@@ -8,8 +8,8 @@ from pathlib import Path
 from typing import Dict, List, Optional, Tuple, Any
 from dataclasses import dataclass
 from datetime import datetime
-from logger import get_logger
-from error_handler import get_error_handler, handle_gracefully
+from .logger import get_logger
+from .error_handler import get_error_handler, handle_gracefully
 
 
 @dataclass
@@ -486,6 +486,29 @@ class TaxonomyManager:
                                         "스칼펠소테일",
                                     ],
                                 },
+                            },
+                            "Siganidae": {  # 래빗피쉬과 (토끼물고기류)
+                                "Siganus": {
+                                    "vulpinus": [
+                                        "Foxface rabbitfish",
+                                        "Vulpine rabbitfish",
+                                        "복숭아 토끼피쉬",
+                                    ],
+                                    "unimaculatus": [
+                                        "Blotched foxface",
+                                        "One-spot foxface",
+                                        "블로치드 폭스페이스",
+                                    ],
+                                    "puellus": [
+                                        "Masked rabbitfish",
+                                        "Masked spinefoot",
+                                        "마스크드 래빗피쉬",
+                                    ],
+                                    "corallinus": [
+                                        "Twospot rabbitfish",
+                                        "코랄린러스 래빗피쉬",
+                                    ],
+                                }
                             },
                             "Pomacanthidae": {  # 엔젤피쉬과
                                 "Centropyge": {
@@ -1422,6 +1445,16 @@ class TaxonomyManager:
                                         "혼드배너피쉬",
                                     ],
                                 },
+                                "Hemitaurichthys": {
+                                    "polylepis": [
+                                        "Pyramid butterflyfish",
+                                        "피라미드버터플라이",
+                                    ],
+                                    "zoster": [
+                                        "Brown-and-white butterflyfish",
+                                        "브라운앤화이트버터플라이",
+                                    ],
+                                },
                                 "Forcipiger": {
                                     "flavissimus": [
                                         "Yellow longnose butterflyfish",
@@ -1754,6 +1787,48 @@ class TaxonomyManager:
                                     "kuiteri": [
                                         "Kuiter's leopard wrasse",
                                         "쿠이테리레오파드놀래기",
+                                    ],
+                                },
+                                "Cirrihilabrus": {
+                                    "solorensis": [
+                                        "Red head solon fairy wrasse",
+                                        "솔론페어리",
+                                    ],
+                                    "cyanopleura": [
+                                        "Blue-sided fairy wrasse",
+                                        "블루사이드페어리",
+                                    ],
+                                    "lineatus": [
+                                        "Lineatus fairy wrasse",
+                                        "리네이투스페어리",
+                                    ],
+                                    "lubbocki": [
+                                        "Lubbock's fairy wrasse",
+                                        "러벅페어리",
+                                    ],
+                                    "exquisitus": [
+                                        "Exquisite fairy wrasse",
+                                        "엑스퀴짓페어리",
+                                    ],
+                                    "jordani": [
+                                        "Flame fairy wrasse",
+                                        "플레임페어리",
+                                    ],
+                                    "lunatus": [
+                                        "Lunate fairy wrasse",
+                                        "루네이트페어리",
+                                    ],
+                                    "rubrofuscus": [
+                                        "Ruby-head fairy wrasse",
+                                        "루비헤드페어리",
+                                    ],
+                                    "naokoae": [
+                                        "Naoko fairy wrasse",
+                                        "나오코페어리",
+                                    ],
+                                    "rubrimarginatus": [
+                                        "Red margin fairy wrasse",
+                                        "레드마진페어리",
                                     ],
                                 },
                                 "Bodianus": {
@@ -2782,6 +2857,32 @@ class TaxonomyManager:
                                     "브로드밴디드파이프피쉬",
                                 ],
                             },
+                        },
+                        "Nemateleotridae": {  # 다트피쉬과 (Firefish / Dartfish)
+                            "Nemateleotris": {
+                                "decora": [
+                                    "Purple firefish",
+                                    "퍼플파이어피쉬",
+                                ],
+                                "magnifica": [
+                                    "Firefish goby",
+                                    "파이어피쉬고비",
+                                ],
+                                "helfrichi": [
+                                    "Helfrich's firefish",
+                                    "헬프리치파이어피쉬",
+                                ],
+                            },
+                            "Ptereleotris": {
+                                "zebra": [
+                                    "Zebra dartfish",
+                                    "제브라다트피쉬",
+                                ],
+                                "hanae": [
+                                    "Blue gudgeon dartfish",
+                                    "블루구전다트피쉬",
+                                ]
+                            }
                         }
                     },
                     "Scorpaeniformes": {  # 쏨뱅이목
@@ -2849,6 +2950,19 @@ class TaxonomyManager:
                                     "Honeycomb grouper",
                                     "허니콤그루퍼",
                                 ],
+                                "polyphekadion": [
+                                    "Camouflage grouper",
+                                    "카모플라쥬그루퍼",
+                                ],
+                            },
+                            "Cromileptes": {
+                                "altivelis": [
+                                    "Panda grouper",
+                                    "Humpback grouper",
+                                    "Humpback seabass",
+                                    "팬더그루퍼",
+                                    "험프백그루퍼",
+                                ],
                             },
                             "Pseudanthias": {
                                 "squamipinnis": [
@@ -2872,22 +2986,105 @@ class TaxonomyManager:
                                     "Square-spot anthias",
                                     "스퀘어스팟안티아스",
                                 ],
-                            },
-                            "Gramma": {
-                                "loreto": [
-                                    "Royal gramma",
-                                    "로얄그라마",
+                                "pictilis": [
+                                    "Pictilis anthias",
+                                    "픽틸리스안티아스",
                                 ],
-                                "melacara": [
-                                    "Blackcap basslet",
-                                    "블랙캡바슬렛",
+                                "smithvanizi": [
+                                    "Resplendent anthias",
+                                    "레스플렌던트안티아스",
+                                ],
+                                "ignitus": [
+                                    "Flame anthias",
+                                    "플레임안티아스",
+                                ],
+                                "evansi": [
+                                    "Evan's anthias",
+                                    "에반스안티아스",
+                                ],
+                                "bartlettorum": [
+                                    "Bartlett's anthias",
+                                    "바틀렛안티아스",
+                                ],
+                                "randalli": [
+                                    "Randall's anthias",
+                                    "랜달안티아스",
+                                ],
+                                "lori": [
+                                    "Lori anthias",
+                                    "로리안티아스",
+                                ],
+                                "fluorescens": [
+                                    "Sunset anthias",
+                                    "선셋안티아스",
+                                ],
+                                # 'parvati'는 현재 유효하지 않고 'bimaculatus'로 통용
+                                "bimaculatus": [
+                                    "Twospot anthias",
+                                    "Two-spot anthias",
+                                    "Bimaculatus anthias",
+                                    "트윈스팟안티아스",
+                                    "투스팟안티아스",
+                                ],
+                            },
+                            "Nemanthias": {
+                                "carberryi": [
+                                    "Threadfin anthias",
+                                    "캐리베리안티아스",
+                                ],
+                            },
+                            "Odontanthias": {
+                                "borbonius": [
+                                    "Borbonius anthias",
+                                    "보르보니우스안티아스",
+                                ],
+                            },
+                            "Tosanoides": {
+                                "flavofasciatus": [
+                                    "Yellow striped anthias",
+                                    "옐로우스트라이프안티아스",
+                                ],
+                            },
+                            "Plectranthias": {
+                                "inermis": [
+                                    "Geometric pygmy perchlet",
+                                    "지오메트릭피그미퍼치렛",
+                                ],
+                                "kelloggi": [
+                                    "Kellogg's perchlet",
+                                    "켈로그퍼치렛",
                                 ],
                             },
                             "Liopropoma": {
                                 "rubre": [
                                     "Peppermint basslet",
                                     "페퍼민트바슬렛",
-                                ]
+                                ],
+                                "swalesi": [
+                                    "Swales' basslet",
+                                    "스웨일스바슬렛",
+                                ],
+                                "carmabi": [
+                                    "Candy basslet",
+                                    "캔디바슬렛",
+                                ],
+                                # 'suscitatum'는 유효한 학명이 아니므로 제거함
+                                "aberrans": [
+                                    "Aberrant basslet",
+                                    "어버런트바슬렛",
+                                ],
+                            },
+                            "Variola": {
+                                "louti": [
+                                    "Louti grouper",
+                                    "루티그루퍼",
+                                ],
+                            },
+                            "Aethaloperca": {
+                                "rogaa": [
+                                    "Redmouth grouper",
+                                    "레드마우스그루퍼",
+                                ],
                             },
                         },
                         "Lutjanidae": {  # 도미과 (스내퍼)
@@ -2920,6 +3117,171 @@ class TaxonomyManager:
                                     "Oriental sweetlips",
                                     "오리엔탈스위트립스",
                                 ],
+                            }
+                        },
+                        "Grammatidae": {  # 그라마과
+                            "Gramma": {
+                                "loreto": [
+                                    "Royal gramma",
+                                    "Fairy basslet",
+                                    "로얄그라마",
+                                ],
+                                "melacara": [
+                                    "Blackcap basslet",
+                                    "블랙캡바슬렛",
+                                ],
+                                "brasiliensis": [
+                                    "Brazilian gramma",
+                                    "브라질리언그라마",
+                                ],
+                            }
+                        },
+                        "Pseudochromidae": {  # 닷백과 (데빌피쉬)
+                            "Pseudochromis": {
+                                "fridmani": [
+                                    "Orchid dottyback",
+                                    "Fridman's dottyback",
+                                    "오키드닷백",
+                                ],
+                                "aldabraensis": [
+                                    "Neon dottyback",
+                                    "네온닷백",
+                                ],
+                                "paccagnellae": [
+                                    "False gramma",
+                                    "Royal dottyback",
+                                    "로얄닷백",
+                                ],
+                                "springeri": [
+                                    "Springer's dottyback",
+                                    "스프링거닷백",
+                                ],
+                                "flavivertex": [
+                                    "Sunrise dottyback",
+                                    "선라이즈닷백",
+                                ],
+                            },
+                            "Labracinus": {
+                                "cyclophthalmus": [
+                                    "Firetail devil",
+                                    "파이어테일데빌",
+                                ],
+                            },
+                        },
+                        "Plesiopidae": {  # 롱핀과 (어세서)
+                            "Plesiops": {
+                                "coeruleolineatus": [
+                                    "Crikey fish",
+                                    "Longfin fish",
+                                    "크리키피쉬",
+                                ],
+                                "oxycephalus": [
+                                    "Sharp-headed longfin",
+                                    "샤프헤드롱핀",
+                                ],
+                            },
+                            "Assessor": {
+                                "macneilli": [
+                                    "Blue assessor",
+                                    "Macneill's assessor",
+                                    "블루어세서",
+                                ],
+                                "flavissimus": [
+                                    "Yellow assessor",
+                                    "옐로우어세서",
+                                ],
+                                "randalli": [
+                                    "Randall's assessor",
+                                    "랜달어세서",
+                                ],
+                            },
+                        },
+                        "Holocentridae": {
+                            # 다이얼새우고기과 (Squirrelfish / Soldierfish)
+                            "Sargocentron": {
+                                "diadema": [
+                                    "Crown squirrelfish",
+                                    "크라운스쿼럴피쉬",
+                                ],
+                                "spiniferum": [
+                                    "Sabre squirrelfish",
+                                    "세이버스쿼럴피쉬",
+                                ],
+                            },
+                            "Holocentrus": {
+                                "adscensionis": [
+                                    "Squirrelfish",
+                                    "레드스쿼럴피쉬",
+                                ]
+                            },
+                            "Myripristis": {
+                                # 대표적인 Soldierfish / Bigeye 계열 - 사용자 요청으로 추가
+                                "berndti": [
+                                    "Bigeye soldierfish",
+                                    "빅아이 솔져피쉬",
+                                ],
+                                "murdjan": [
+                                    "Pinecone soldierfish",
+                                    "파인콘 솔져피쉬",
+                                ],
+                            }
+                        },
+                        "Mullidae": {  # 염소고기과 (Goatfish)
+                            "Parupeneus": {
+                                "multifasciatus": [
+                                    "Manybar goatfish",
+                                    "메니바르고트피쉬",
+                                ],
+                                "porphyreus": [
+                                    "Red goatfish",
+                                    "레드고트피쉬",
+                                ],
+                            },
+                            "Upeneus": {
+                                "tragula": [
+                                    "Freckled goatfish",
+                                    "프레클드고트피쉬",
+                                ]
+                            }
+                        },
+                        "Malacanthidae": {  # 타일피쉬과 (Tilefish)
+                            "Hoplolatilus": {
+                                "chlupatyi": [
+                                    "Flashing tilefish",
+                                    "플래싱타일피쉬",
+                                ],
+                                "fourmanoiri": [
+                                    "Purple tilefish",
+                                    "퍼플타일피쉬",
+                                ],
+                            }
+                        },
+                        "Sphyraenidae": {  # 바라쿠다과 (소형 juvenile 제한적 관상)
+                            "Sphyraena": {
+                                "barras": [
+                                    "Barracuda (juvenile)",
+                                    "주니어바라쿠다",
+                                ]
+                            }
+                        },
+                        "Aulostomidae": {  # 트럼펫피쉬과
+                            "Aulostomus": {
+                                "chinensis": [
+                                    "Chinese trumpetfish",
+                                    "차이니스트럼펫피쉬",
+                                ],
+                                "strigosus": [
+                                    "Atlantic trumpetfish",
+                                    "애틀랜틱트럼펫피쉬",
+                                ]
+                            }
+                        },
+                        "Fistulariidae": {  # 코르넷피쉬과
+                            "Fistularia": {
+                                "commersonii": [
+                                    "Bluespotted cornetfish",
+                                    "블루스팟코넷피쉬",
+                                ]
                             }
                         },
                     },
@@ -3029,6 +3391,24 @@ class TaxonomyManager:
         if taxonomy_file:
             self.load_taxonomy_from_file(taxonomy_file)
 
+    # 과(Family) 태그 지정:
+    # 'core'     : 핵심 관상어
+    # 'extended' : 확장/드물게 사육
+    # 'exclude'  : 비관상/제외
+        # 기본적으로 지정되지 않은 과는 'core'로 간주
+        self.family_tags: Dict[str, str] = {
+            # 제외 (사육 부적합 / 대형 포식자)
+            "Sphyraenidae": "exclude",  # 바라쿠다 - 대형 포식성, 일반 관상용 제외
+            # 확장 (특수 수조/대형 수조에서 제한적으로 사육)
+            "Hemiscylliidae": "extended",  # 대나무상어
+            "Scyliorhinidae": "extended",  # 고양이상어
+            "Holocentridae": "extended",  # 다소 크고 야행성 (사육은 가능)
+            "Mullidae": "extended",       # 활동성 높음
+            "Malacanthidae": "extended",  # 타일피쉬 (점프 위험)
+            "Aulostomidae": "extended",   # 트럼펫피쉬 (대형 수조)
+            "Fistulariidae": "extended",  # 코넷피쉬 (매우 길어 공간 요구)
+        }
+
         # 인덱스 생성
         self._build_indexes()
 
@@ -3036,7 +3416,7 @@ class TaxonomyManager:
         """검색 성능을 위한 인덱스 생성"""
         self.species_index: Dict[str, SpeciesInfo] = {}
         self.genus_index: Dict[str, List[SpeciesInfo]] = {}
-        self.family_index: Dict[str, List[SpeciesInfo]] = {}
+        self.family_index: Dict[Tuple[str, str, str], List[SpeciesInfo]] = {}
         self.common_name_index: Dict[str, List[SpeciesInfo]] = {}
 
         # Chondrichthyes 처리
@@ -3080,26 +3460,70 @@ class TaxonomyManager:
 
     def _process_osteichthyes_data(self, data, class_name):
         """Osteichthyes 데이터 재귀 처리"""
-        for key, value in data.items():
-            if not isinstance(value, dict):
-                continue
+        def find_families_recursive(current_data: Dict[str, Any]):
+            """재귀적으로 모든 과(Family) 찾기"""
+            for key, value in current_data.items():
+                if not isinstance(value, dict):
+                    continue
+                
+                # 과(Family) 감지 - 'idae'로 끝나는 것
+                if key.endswith('idae'):
+                    # 과를 찾았으면 상위 목(order) 찾기
+                    order_name = self._find_order_name(data, key)
+                    self._process_family_data(
+                        value,
+                        key,
+                        order_name,
+                        class_name,
+                    )
+                else:
+                    # 과가 아니면 더 깊이 탐색
+                    find_families_recursive(value)
+        
+        # 재귀 탐색 시작
+        find_families_recursive(data)
+    
+    def _find_order_name(
+        self, root_data: Dict[str, Any], family_name: str
+    ) -> str:
+        """특정 과가 속한 목(order) 이름 찾기"""
+        def search_order(
+            data: Dict[str, Any], path: List[str] = []
+        ) -> Optional[str]:
+            for key, value in data.items():
+                if not isinstance(value, dict):
+                    continue
+                
+                current_path = path + [key]
+                
+                # 현재 레벨에서 찾는 과를 발견
+                if family_name in value:
+                    # 경로에서 'formes'로 끝나는 목 찾기
+                    for p in reversed(current_path):
+                        if p.endswith('formes'):
+                            return p
+                    # 'formes'가 없으면 마지막 레벨을 목으로 간주
+                    return current_path[-1] if current_path else "Unknown"
+                
+                # 재귀 탐색
+                result = search_order(value, current_path)
+                if result:
+                    return result
             
-            # 목(order)인지 확인 (형태소 'formes'로 끝남)
-            if key.endswith('formes'):
-                order_name = key
-                order_data = value
-                # 목 아래의 과들 처리
-                for family_name, family_data in order_data.items():
-                    if isinstance(family_data, dict):
-                        self._process_family_data(
-                            family_data,
-                            family_name,
-                            order_name,
-                            class_name,
-                        )
-            else:
-                # 상목이나 다른 분류 단위 - 재귀적으로 처리
-                self._process_osteichthyes_data(value, class_name)
+            return None
+        
+        result = search_order(root_data)
+        return result or "Unknown"
+    
+    def _is_family_with_genera(self, family_data):
+        """과 데이터가 직접 속을 포함하는지 확인"""
+        for key, value in family_data.items():
+            if isinstance(value, dict):
+                # 속 데이터인지 확인 (종 데이터를 포함하는지)
+                for subkey, subvalue in value.items():
+                    if isinstance(subvalue, list):  # 종의 일반명 리스트
+                        return True
+        return False
 
     def _process_family_data(
         self, family_data, family_name, order_name, class_name
@@ -3145,9 +3569,14 @@ class TaxonomyManager:
         self.genus_index[species_info.genus].append(species_info)
 
         # 과 인덱스
-        if species_info.family not in self.family_index:
-            self.family_index[species_info.family] = []
-        self.family_index[species_info.family].append(species_info)
+        family_key = (
+            species_info.class_name,
+            species_info.order,
+            species_info.family,
+        )
+        if family_key not in self.family_index:
+            self.family_index[family_key] = []
+        self.family_index[family_key].append(species_info)
 
         # 일반명 인덱스
         for common_name in species_info.common_names:
@@ -3194,31 +3623,55 @@ class TaxonomyManager:
         """속명으로 종 목록 반환"""
         return self.genus_index.get(genus_name, [])
 
-    def get_all_families(self) -> List[Tuple[str, str, str]]:
-        """모든 과 목록 반환 (class, order, family)"""
-        families = []
+    def get_all_families(
+        self, ornamental_only: bool = True
+    ) -> List[Tuple[str, str, str]]:
+        """과 목록 반환 (class, order, family)
+
+        ornamental_only=True 이면 family_tags 에서 'exclude' 로 표시된 과는 제외.
+        확장(ex. extended) 과도 포함(일반적으로 사육 가능). 향후 필요 시 파라미터 추가 가능.
+        """
+        families: List[Tuple[str, str, str]] = []
+
+        def include_family(family_name: str) -> bool:
+            if not ornamental_only:
+                return True
+            tag = self.family_tags.get(family_name, "core")
+            return tag != "exclude"
 
         # Chondrichthyes 처리
         chondrichthyes = self.fish_taxonomy.get("Chondrichthyes", {})
         for order_name, order_data in chondrichthyes.items():
             if isinstance(order_data, dict):
                 for family_name, family_data in order_data.items():
-                    if isinstance(family_data, dict):
+                    if (
+                        isinstance(family_data, dict)
+                        and include_family(family_name)
+                    ):
                         families.append(
                             ("Chondrichthyes", order_name, family_name)
                         )
 
-        # Osteichthyes 처리 - 실제 family들만 추출
-        families_set = set()
-        for species_info in self.species_index.values():
-            if species_info.class_name == "Osteichthyes":
-                family_tuple = (species_info.class_name, species_info.order, species_info.family)
-                families_set.add(family_tuple)
-        
-        families.extend(sorted(families_set))
+        # Osteichthyes 처리 - family_index 사용 (이미 인덱스에 존재하는 것만)
+        for family_key, _species_list in self.family_index.items():
+            class_name, order_name, family_name = family_key
+            if class_name == "Osteichthyes" and include_family(family_name):
+                families.append((class_name, order_name, family_name))
+
+        # 목(Order) 우선 정렬, 같은 목 내에서는 과(Family) 알파벳 순
+        families.sort(key=lambda x: (x[1].lower(), x[2].lower()))
         return families
 
-        return families
+    def is_family_excluded(self, family_name: str) -> bool:
+        """관상어 필터에서 제외되는 과인지 여부"""
+        return self.family_tags.get(family_name, "core") == "exclude"
+
+    def set_family_tag(self, family_name: str, tag: str) -> None:
+        """과 태그 동적 설정 (core/extended/exclude)"""
+        if tag not in ("core", "extended", "exclude"):
+            raise ValueError("tag must be one of: core, extended, exclude")
+        self.family_tags[family_name] = tag
+        self.logger.info(f"과 태그 변경: {family_name} -> {tag}")
 
     def get_all_species(self) -> List[SpeciesInfo]:
         """모든 종 정보 반환"""

@@ -10,21 +10,23 @@ from typing import Optional, Dict, Any, List
 from urllib.parse import urlparse
 import requests
 from PIL import Image
-from logger import get_logger
-from error_handler import get_error_handler, with_retry, ErrorType
-from config_manager import ConfigManager
-from image_metadata import ImageMetadata
+from .logger import get_logger
+from .error_handler import get_error_handler, with_retry, ErrorType
+from .config_manager import ConfigManager
+from .image_metadata import ImageMetadata
+
 
 class DownloadResult:
     """다운로드 결과 클래스"""
-    def __init__(self, success: bool, file_path: Optional[Path] = None, 
+
+    def __init__(self, success: bool, file_path: Optional[Path] = None,
                  metadata: Optional[ImageMetadata] = None, error: Optional[str] = None):
         self.success = success
         self.file_path = file_path
         self.metadata = metadata
         self.error = error
         self.download_time = time.time()
-    
+
     def __bool__(self) -> bool:
         return self.success
 

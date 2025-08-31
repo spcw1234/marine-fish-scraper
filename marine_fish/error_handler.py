@@ -9,7 +9,7 @@ from enum import Enum
 from dataclasses import dataclass, field
 import requests
 from requests.exceptions import RequestException, Timeout, ConnectionError
-from logger import get_logger
+from .logger import get_logger
 
 
 class ErrorType(Enum):

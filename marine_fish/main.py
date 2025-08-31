@@ -8,12 +8,12 @@ Marine Fish Scraper - Main Entry Point
 import sys
 import argparse
 from pathlib import Path
-from typing import Optional
 
 # 로컬 모듈 임포트
-from config_manager import ConfigManager
-from logger import get_logger, setup_logging
-from taxonomy_manager import TaxonomyManager
+from .config_manager import ConfigManager
+from .logger import setup_logging
+from .taxonomy_manager import TaxonomyManager
+
 
 def parse_arguments():
     """명령행 인수 파싱"""
@@ -31,76 +31,76 @@ def parse_arguments():
     # 스크래핑 대상 설정
     target_group = parser.add_mutually_exclusive_group()
     target_group.add_argument(
-        "--species", 
+        "--species",
         help="특정 종 스크래핑 (예: 'Amphiprion ocellaris')"
     )
     target_group.add_argument(
-        "--genus", 
+        "--genus",
         help="특정 속의 모든 종 스크래핑 (예: 'Amphiprion')"
     )
     target_group.add_argument(
-        "--family", 
+        "--family",
         help="특정 과의 모든 종 스크래핑 (예: 'Pomacentridae')"
     )
     target_group.add_argument(
-        "--all", 
+        "--all",
         action="store_true",
         help="모든 종 스크래핑"
     )
     
     # 스크래핑 설정
     parser.add_argument(
-        "--count", 
-        type=int, 
+        "--count",
+        type=int,
         default=20,
         help="종당 다운로드할 이미지 수 (기본값: 20)"
     )
     parser.add_argument(
-        "--output", 
+        "--output",
         type=str,
         help="출력 디렉토리 (기본값: config에서 설정)"
     )
     parser.add_argument(
-        "--config", 
+        "--config",
         type=str,
         help="설정 파일 경로 (기본값: config.json)"
     )
     
     # 세션 관리
     parser.add_argument(
-        "--resume", 
+        "--resume",
         type=str,
         help="중단된 세션 ID로 재시작"
     )
     parser.add_argument(
-        "--list-sessions", 
+        "--list-sessions",
         action="store_true",
         help="저장된 세션 목록 표시"
     )
     
     # 기타 옵션
     parser.add_argument(
-        "--dry-run", 
+        "--dry-run",
         action="store_true",
         help="실제 다운로드 없이 시뮬레이션만 실행"
     )
     parser.add_argument(
-        "--verbose", "-v", 
+        "--verbose", "-v",
         action="store_true",
         help="상세 로그 출력"
     )
     parser.add_argument(
-        "--quiet", "-q", 
+        "--quiet", "-q",
         action="store_true",
         help="최소한의 로그만 출력"
     )
     
     return parser.parse_args()
 
+
 def setup_environment(args):
     """환경 설정"""
-    # 로깅 설정
-    log_level = "DEBUG" if args.verbose else "WARNING" if args.quiet else "INFO"
+    # 로깅 설정 (레벨 결정은 setup_logging 내부 핸들러 기준 사용)
     logger = setup_logging("marine_scraper")
     
     # 설정 파일 로드
@@ -113,13 +113,16 @@ def setup_environment(args):
     
     return logger, config
 
+
 def get_target_species(args, taxonomy_manager: TaxonomyManager):
     """스크래핑 대상 종 목록 생성"""
     if args.species:
         # 특정 종
         parts = args.species.split()
         if len(parts) != 2:
-            raise ValueError("종명은 '속명 종명' 형식이어야 합니다 (예: 'Amphiprion ocellaris')")
+            raise ValueError(
+                "종명은 '속명 종명' 형식이어야 합니다 (예: 'Amphiprion ocellaris')"
+            )
         genus, species = parts
         species_info = taxonomy_manager.get_species_info(genus, species)
         if not species_info:
@@ -148,7 +151,7 @@ def get_target_species(args, taxonomy_manager: TaxonomyManager):
         # 기본값: 인기 있는 관상어 몇 종
         popular_species = [
             "Amphiprion ocellaris",
-            "Paracanthurus hepatus", 
+            "Paracanthurus hepatus",
             "Zebrasoma flavescens",
             "Centropyge bicolor"
         ]
@@ -158,7 +161,8 @@ def get_target_species(args, taxonomy_manager: TaxonomyManager):
             species_info = taxonomy_manager.get_species_info(genus, species)
             if species_info:
                 species_list.append(species_info)
-        return species_list
+    return species_list
+
 
 def list_saved_sessions(config: ConfigManager):
     """저장된 세션 목록 표시"""
@@ -186,7 +190,11 @@ def list_saved_sessions(config: ConfigManager):
             total_species = session_data.get('total_species', 0)
             completed_species = session_data.get('completed_species', 0)
             
-            status = "완료" if completed_species >= total_species else f"{completed_species}/{total_species}"
+            status = (
+                "완료"
+                if completed_species >= total_species
+                else f"{completed_species}/{total_species}"
+            )
             
             print(f"ID: {session_id}")
             print(f"생성일: {created_at}")
@@ -195,6 +203,7 @@ def list_saved_sessions(config: ConfigManager):
             
         except Exception as e:
             print(f"세션 파일 읽기 오류: {session_file.name} - {e}")
+
 
 def print_banner():
     """프로그램 배너 출력"""
@@ -214,6 +223,7 @@ def print_banner():
         "╚══════════════════════════════════════════════════════════════╝\n"
     )
     print(banner)
+
 
 def print_main_menu():
     """메인 메뉴 출력"""
@@ -236,6 +246,7 @@ def print_main_menu():
     )
     print(menu)
 
+
 def ask_yes_no(prompt: str, default: str = 'n') -> bool:
     """y/n 입력을 받아 불리언 반환 (기본값 지원)"""
     default = (default or 'n').lower()
@@ -244,6 +255,7 @@ def ask_yes_no(prompt: str, default: str = 'n') -> bool:
     if ans == '':
         return default == 'y'
     return ans in ('y', 'yes')
+
 
 def show_family_selection_menu(taxonomy_manager: TaxonomyManager):
     """과 선택 메뉴 표시"""
@@ -266,12 +278,15 @@ def show_family_selection_menu(taxonomy_manager: TaxonomyManager):
         return None
     except ValueError:
         print("❌ 올바른 숫자를 입력해주세요.")
-        return None
+    return None
+
 
 def show_genus_selection_menu(taxonomy_manager: TaxonomyManager, family_info):
     """속 선택 메뉴 표시"""
     class_name, order_name, family_name = family_info
-    species_list = taxonomy_manager.get_species_by_family(class_name, order_name, family_name)
+    species_list = taxonomy_manager.get_species_by_family(
+        class_name, order_name, family_name
+    )
     
     # 속별로 그룹화
     genera = {}
@@ -300,9 +315,12 @@ def show_genus_selection_menu(taxonomy_manager: TaxonomyManager, family_info):
         return None, None
     except ValueError:
         print("❌ 올바른 숫자를 입력해주세요.")
-        return None, None
+    return None, None
 
-def show_species_selection_menu(taxonomy_manager: TaxonomyManager, genus, species_list):
+
+def show_species_selection_menu(
+    taxonomy_manager: TaxonomyManager, genus, species_list
+):
     """종 선택 메뉴 표시"""
     print(f"\n📋 {genus} 속의 종(Species) 목록:")
     print("─" * 60)
@@ -323,7 +341,8 @@ def show_species_selection_menu(taxonomy_manager: TaxonomyManager, genus, specie
         return None
     except ValueError:
         print("❌ 올바른 숫자를 입력해주세요.")
-        return None
+    return None
+
 
 def interactive_menu():
     """인터랙티브 메뉴 시스템"""
@@ -331,7 +350,7 @@ def interactive_menu():
     
     # 시스템 초기화
     config = ConfigManager()
-    logger = setup_logging("marine_scraper", "logs")
+    setup_logging("marine_scraper", "logs")
     
     print("✅ 시스템 초기화 완료")
     
@@ -339,7 +358,7 @@ def interactive_menu():
     taxonomy_manager = TaxonomyManager()
     
     # MarineScraper 초기화
-    from marine_scraper import MarineScraper
+    from .marine_scraper import MarineScraper
     scraper = MarineScraper(config, taxonomy_manager)
     
     while True:
@@ -354,7 +373,7 @@ def interactive_menu():
                 start_time = time.time()
                 scraper.scrape_all_fish()
                 duration = time.time() - start_time
-                print(f"\n🎉 스크래핑 완료!")
+                print("\n🎉 스크래핑 완료!")
                 print(f"⏱️ 소요 시간: {duration/3600:.1f}시간")
             else:
                 print("❌ 취소되었습니다.")
@@ -368,7 +387,9 @@ def interactive_menu():
                 print(f"\n🎯 {family_name} 과 다운로드 시작...")
                 
                 # 해당 과의 모든 종 가져오기
-                species_list = taxonomy_manager.get_species_by_family(class_name, order_name, family_name)
+                species_list = taxonomy_manager.get_species_by_family(
+                    class_name, order_name, family_name
+                )
                 
                 if species_list:
                     import time
@@ -376,8 +397,12 @@ def interactive_menu():
                     total_downloaded = 0
                     
                     for genus, species in species_list:
-                        common_names = taxonomy_manager.get_common_names(genus, species)
-                        downloaded = scraper.scrape_species(genus, species, common_names, 500)
+                        common_names = taxonomy_manager.get_common_names(
+                            genus, species
+                        )
+                        downloaded = scraper.scrape_species(
+                            genus, species, common_names, 500
+                        )
                         total_downloaded += downloaded
                     
                     duration = time.time() - start_time
@@ -401,22 +426,30 @@ def interactive_menu():
                     break
                 
                 # 2단계: 속 선택
-                genus, species_list = show_genus_selection_menu(taxonomy_manager, family_info)
+                genus, species_list = show_genus_selection_menu(
+                    taxonomy_manager, family_info
+                )
                 if not genus:
                     continue
                 
                 # 3단계: 종 선택
-                selected_species = show_species_selection_menu(taxonomy_manager, genus, species_list)
+                selected_species = show_species_selection_menu(
+                    taxonomy_manager, genus, species_list
+                )
                 if not selected_species:
                     continue
                 
                 # 다운로드 실행
-                common_names = taxonomy_manager.get_common_names(genus, selected_species)
+                common_names = taxonomy_manager.get_common_names(
+                    genus, selected_species
+                )
                 print(f"\n🎯 {genus} {selected_species} 다운로드 시작...")
                 
                 import time
                 start_time = time.time()
-                downloaded = scraper.scrape_species(genus, selected_species, common_names, 500)
+                downloaded = scraper.scrape_species(
+                    genus, selected_species, common_names, 500
+                )
                 duration = time.time() - start_time
                 
                 print(f"\n🎉 {genus} {selected_species} 다운로드 완료!")
@@ -427,36 +460,81 @@ def interactive_menu():
                     break
         
         elif choice == '4':
+            # 세션 재개 (미구현)
             print("\n🔄 세션 관리 기능은 아직 구현 중입니다.")
             print("현재는 기본 스크래핑만 지원됩니다.")
         
-        elif choice == '4':
-            try:
-                images_per_class = input("클래스당 이미지 수를 입력하세요 (기본값: 100): ").strip()
-                if images_per_class:
-                    images_per_class = int(images_per_class)
-                else:
-                    images_per_class = 100
-                if images_per_class <= 0:
-                    print("❌ 양수를 입력해주세요.")
-                else:
-                    print(f"\n🎯 훈련용 데이터셋 생성 중 (클래스당 {images_per_class}장)...")
-                    scraper.create_training_dataset(images_per_class)
-                    print("✅ 훈련용 데이터셋 생성 완료!")
-            except ValueError:
-                print("❌ 올바른 숫자를 입력해주세요.")
-        
         elif choice == '5':
-            print("\n📊 데이터셋 분석 중...")
-            scraper.analyze_dataset()
+            # 훈련용 데이터셋 생성 (종별 30장 추출)
+            print("\n🎯 종별 훈련용 데이터셋 생성: 각 최하위 종 폴더에서 최대 30장 샘플링")
+            try:
+                per_species = 30
+                # 원본 데이터셋 위치 추정
+                dataset_root = (
+                    scraper.dataset_dir
+                    if hasattr(scraper, 'dataset_dir')
+                    else Path('dataset')
+                )
+                if not dataset_root.exists():
+                    print("❌ dataset 폴더가 없습니다.")
+                else:
+                    import random
+                    import shutil
+                    train_root = Path('train')
+                    train_root.mkdir(exist_ok=True)
+                    copied = 0
+                    species_count = 0
+                    # 클래스(강) → (목/과/속...) → 종 폴더 탐색
+                    for class_dir in dataset_root.iterdir():
+                        if not class_dir.is_dir():
+                            continue
+                        for species_dir in class_dir.rglob('*'):
+                            if not species_dir.is_dir():
+                                continue
+                            # 종 폴더 패턴: 마지막 디렉토리명이 genus_species 형태라고 가정
+                            name = species_dir.name
+                            if '_' not in name:
+                                continue
+                            # 이미지 수집
+                            images = []
+                            for p in species_dir.iterdir():
+                                if p.suffix.lower() in [
+                                    '.jpg', '.jpeg', '.png'
+                                ]:
+                                    images.append(p)
+                            if not images:
+                                continue
+                            species_count += 1
+                            take = min(per_species, len(images))
+                            selected = random.sample(images, take)
+                            out_dir = train_root / name
+                            out_dir.mkdir(parents=True, exist_ok=True)
+                            for img in selected:
+                                dst = out_dir / img.name
+                                if not dst.exists():
+                                    try:
+                                        shutil.copy2(img, dst)
+                                        copied += 1
+                                    except Exception as ce:
+                                        print(f"⚠️ 복사 실패: {img} - {ce}")
+                    print(
+                        f"✅ 완료: {species_count}개 종에서 {copied}개 "
+                        f"이미지 샘플링 → train/"
+                    )
+            except Exception as e:
+                print(f"❌ 생성 실패: {e}")
         
         elif choice == '6':
-            print("\n🏷️ 오토 라벨링 작업공간 설정 기능은 아직 구현 중입니다.")
-        
+            # 데이터셋 분석 (미구현)
+            print("\n📈 데이터셋 분석 기능은 아직 구현 중입니다.")
+
         elif choice == '7':
-            print("\n⚙️ 설정 관리 기능은 아직 구현 중입니다.")
-        
+            print("\n🏷️ 오토 라벨링 작업공간 설정 기능은 아직 구현 중입니다.")
+
         elif choice == '8':
+            print("\n⚙️ 설정 관리 기능은 아직 구현 중입니다.")
+
+        elif choice == '9':
             print("\n🔍 시스템 상태 확인 중...")
             stats = taxonomy_manager.get_taxonomy_statistics()
             print("\n📊 분류 체계 통계:")
@@ -473,7 +551,8 @@ def interactive_menu():
         else:
             print("❌ 잘못된 선택입니다. 1-9 중에서 선택해주세요.")
         
-        input("\n계속하려면 엔터를 누르세요...")
+    input("\n계속하려면 엔터를 누르세요...")
+
 
 def main():
     """메인 함수"""
@@ -507,11 +586,14 @@ def main():
         if args.dry_run:
             logger.info("🔍 DRY RUN 모드 - 실제 다운로드는 수행하지 않습니다")
             for species_info in target_species:
-                logger.info(f"  - {species_info.scientific_name} ({species_info.primary_common_name})")
+                    logger.info(
+                        f"  - {species_info.scientific_name} "
+                        f"({species_info.primary_common_name})"
+                    )
             return
         
         # MarineScraper 초기화
-        from marine_scraper import MarineScraper
+        from .marine_scraper import MarineScraper
         scraper = MarineScraper(config, taxonomy_manager)
         
         # 세션 복원 또는 새 세션 시작
@@ -554,5 +636,6 @@ def main():
             print(traceback.format_exc())
         sys.exit(1)
 
+ 
 if __name__ == "__main__":
     main()

@@ -10,14 +10,14 @@ from dataclasses import dataclass
 
 # 현재 폴더의 모듈들 import (상대 경로 제거)
 try:
-    from scraping_session import ScrapingSession, SessionManager, SessionStatus
-    from image_metadata import ImageMetadata, MetadataCollection
-    from config_manager import ConfigManager
-    from taxonomy_manager import TaxonomyManager
-    from image_downloader import ImageDownloader, DownloadResult
-    from image_validator import ImageValidator
-    from logger import get_logger
-    from error_handler import get_error_handler, with_retry, ErrorType
+    from .scraping_session import ScrapingSession, SessionManager, SessionStatus
+    from .image_metadata import ImageMetadata, MetadataCollection
+    from .config_manager import ConfigManager
+    from .taxonomy_manager import TaxonomyManager
+    from .image_downloader import ImageDownloader, DownloadResult
+    from .image_validator import ImageValidator
+    from .logger import get_logger
+    from .error_handler import get_error_handler, with_retry, ErrorType
 except ImportError as e:
     print(f"Import error: {e}")
     print("일부 모듈이 아직 생성되지 않았습니다. 필요한 모듈들을 먼저 생성해주세요.")
