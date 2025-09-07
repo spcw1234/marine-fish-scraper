@@ -508,6 +508,46 @@ class TaxonomyManager:
                                         "Twospot rabbitfish",
                                         "코랄린러스 래빗피쉬",
                                     ],
+                                    # ===== 추가 확장 종 (Foxface / Rabbitfish 다양화)
+                                    # 목록은 대표적 사육/유통 종 위주 =====
+                                    "magnificus": [
+                                        "Magnificent foxface",
+                                        "매그니피센트폭스페이스",
+                                    ],
+                                    "doliatus": [
+                                        "Barred spinefoot",
+                                        "Blue-lined rabbitfish",
+                                        "바드스파인풋",
+                                        "블루라인래빗피쉬",
+                                    ],
+                                    "virgatus": [
+                                        "Two-barred rabbitfish",
+                                        "투바랏래빗피쉬",
+                                    ],
+                                    "uspi": [
+                                        "Bicolor foxface",
+                                        "바이컬러폭스페이스",
+                                    ],
+                                    "guttatus": [
+                                        "Golden rabbitfish",
+                                        "골든래빗피쉬",
+                                    ],
+                                    "lineatus": [
+                                        "Lined rabbitfish",
+                                        "라인드래빗피쉬",
+                                    ],
+                                    "canaliculatus": [
+                                        "White-spotted spinefoot",
+                                        "화이트스팟스파인풋",
+                                    ],
+                                    "stellatus": [
+                                        "Starry rabbitfish",
+                                        "스타리래빗피쉬",
+                                    ],
+                                    "argenteus": [
+                                        "Streamlined spinefoot",
+                                        "스트림라인드스파인풋",
+                                    ],
                                 }
                             },
                             "Pomacanthidae": {  # 엔젤피쉬과
@@ -3498,11 +3538,11 @@ class TaxonomyManager:
                 
                 # 현재 레벨에서 찾는 과를 발견
                 if family_name in value:
-                    # 경로에서 'formes'로 끝나는 목 찾기
+                    # 경로에서 'formes' 또는 'ales'로 끝나는 목 찾기
                     for p in reversed(current_path):
-                        if p.endswith('formes'):
+                        if p.endswith('formes') or p.endswith('ales'):
                             return p
-                    # 'formes'가 없으면 마지막 레벨을 목으로 간주
+                    # 'formes'/'ales'가 없으면 마지막 레벨을 목으로 간주
                     return current_path[-1] if current_path else "Unknown"
                 
                 # 재귀 탐색

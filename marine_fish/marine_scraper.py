@@ -36,7 +36,7 @@ class MarineScraper:
         if taxonomy_manager:
             self.taxonomy_manager = taxonomy_manager
         else:
-            from taxonomy_manager import TaxonomyManager
+            from .taxonomy_manager import TaxonomyManager
             self.taxonomy_manager = TaxonomyManager()
         
         # HTTP 세션
@@ -1373,8 +1373,10 @@ class MarineScraper:
         
         return images[:max_images]
     
-    def _get_species_directory_path(self, genus: str, species: str) -> Path:
-        """종의 분류학적 위치에 따른 디렉토리 경로 반환"""
+    def _get_species_directory_path(
+        self, genus: str, species: str, variant: str | None = None
+    ) -> Path:
+        """종의 분류학적 위치에 따른 디렉토리 경로 반환 (variant 하위 폴더 지원)"""
         # TaxonomyManager에서 종 정보 가져오기
         species_info = self.taxonomy_manager.get_species_info(genus, species)
         
@@ -1382,38 +1384,105 @@ class MarineScraper:
             # 정확한 분류학적 계층구조
             if species_info.class_name == "Chondrichthyes":
                 # dataset/Chondrichthyes/Order/Family/Genus/Genus_species
-                full_path = (self.dataset_dir / 
-                            species_info.class_name / 
-                            species_info.order / 
-                            species_info.family / 
-                            species_info.genus / 
-                            f"{genus}_{species}")
-            else:  # Osteichthyes
-                # dataset/Osteichthyes/Actinopterygii/Superorder/Order/Family/Genus/Genus_species
-                # 상목(superorder) 정보가 없으므로 일단 Order부터 시작
-                full_path = (self.dataset_dir / 
-                            species_info.class_name / 
-                            "Actinopterygii" /
-                            species_info.order / 
-                            species_info.family / 
-                            species_info.genus / 
-                            f"{genus}_{species}")
+                full_path = (
+                    self.dataset_dir
+                    / species_info.class_name
+                    / species_info.order
+                    / species_info.family
+                    / species_info.genus
+                    / f"{genus}_{species}"
+                )
+            elif species_info.class_name == "Osteichthyes":
+                # dataset/Osteichthyes/Actinopterygii/Order/Family/Genus/Genus_species
+                full_path = (
+                    self.dataset_dir
+                    / species_info.class_name
+                    / "Actinopterygii"
+                    / species_info.order
+                    / species_info.family
+                    / species_info.genus
+                    / f"{genus}_{species}"
+                )
+            elif species_info.class_name == "Anthozoa":
+                # 산호: dataset/Anthozoa/Order/Family/Genus/Genus_species
+                full_path = (
+                    self.dataset_dir
+                    / species_info.class_name
+                    / species_info.order
+                    / species_info.family
+                    / species_info.genus
+                    / f"{genus}_{species}"
+                )
+            else:
+                # 알 수 없는 class는 보수적으로 class/order/family/genus
+                full_path = (
+                    self.dataset_dir
+                    / species_info.class_name
+                    / species_info.order
+                    / species_info.family
+                    / species_info.genus
+                    / f"{genus}_{species}"
+                )
         else:
             # 분류 정보를 찾을 수 없는 경우 기본 경로
-            full_path = (self.dataset_dir / 
-                        "Unclassified" / 
-                        genus / 
-                        f"{genus}_{species}")
+            full_path = (
+                self.dataset_dir
+                / "Unclassified"
+                / genus
+                / f"{genus}_{species}"
+            )
         
+        # 변이(트레이드 네임) 하위 폴더 추가
+        if variant:
+            safe_variant = self._sanitize_name(variant)
+            full_path = full_path / safe_variant
+
         return full_path
+
+    def download_species(
+        self,
+        genus_species: str,
+        count: int = 50,
+        variant: str | None = None,
+    ) -> int:
+        """간편 종 다운로드 래퍼: "Genus species" 문자열과 개수로 호출.
+        산호 기본은 50장으로 사용.
+        """
+        try:
+            parts = genus_species.split()
+            if len(parts) != 2:
+                print(f"잘못된 종명 형식: {genus_species}")
+                return 0
+            genus, species = parts
+            common_names = self.taxonomy_manager.get_common_names(
+                genus,
+                species,
+            )
+            return self.scrape_species(
+                genus,
+                species,
+                common_names,
+                count,
+                variant,
+            )
+        except Exception as e:
+            print(f"{genus_species} 다운로드 중 오류: {e}")
+            return 0
+
+    def _sanitize_name(self, name: str) -> str:
+        """폴더/파일명에 안전하도록 정리"""
+        import re
+        cleaned = re.sub(r"[\\/]+", "-", name).strip()
+        cleaned = re.sub(r"[<>:\\|?*]", "", cleaned)
+        return cleaned[:80]
     
     def is_valid_image_url(self, url):
         """유효한 이미지 URL인지 확인 (강화된 필터링)"""
         if not url or len(url) < 10:
             return False
-        
+
         url_lower = url.lower()
-        
+
         # 명백히 문제가 있는 패턴들 제외
         exclude_patterns = [
             'javascript:', 'data:text', 'mailto:',
@@ -1433,42 +1502,47 @@ class MarineScraper:
             'loading', 'spinner', 'placeholder', 'blank',
             'error', '404', 'not-found', 'missing'
         ]
-        
+
         if any(pattern in url_lower for pattern in exclude_patterns):
             return False
-        
+
         # HTTP/HTTPS URL 체크
-        if url.startswith(('http://', 'https://')):
-            # 이미지 확장자가 있으면 허용 (단, 제외 패턴에 걸리지 않은 경우)
-            if any(ext in url_lower for ext in ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp']):
-                return True
-            
-            # 어류 관련 키워드가 있으면 허용
-            fish_keywords = [
-                'fish', 'marine', 'aquarium', 'coral', 'reef', 'ocean', 'sea',
-                'underwater', 'diving', 'snorkel', 'scuba', 'tropical',
-                'saltwater', 'species', 'specimen', 'animal', 'wildlife'
-            ]
-            if any(keyword in url_lower for keyword in fish_keywords):
-                return True
-            
-            # 신뢰할 수 있는 이미지 호스팅 도메인들
-            trusted_domains = [
-                'imgur', 'flickr', 'wikimedia', 'googleusercontent', 
-                'pinimg', 'unsplash', 'pexels', 'fishbase', 'inaturalist',
-                'eol.org', 'gbif.org', 'marinespecies.org'
-            ]
-            if any(domain in url_lower for domain in trusted_domains):
-                return True
-        
+        if not url.startswith(('http://', 'https://')):
+            return False
+
+        # 이미지 확장자가 있으면 허용 (단, 제외 패턴에 걸리지 않은 경우)
+        if any(
+            ext in url_lower
+            for ext in ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp']
+        ):
+            return True
+
+        # 어류/산호 관련 키워드가 있으면 허용
+        allow_keywords = [
+            'fish', 'marine', 'aquarium', 'coral', 'reef', 'ocean', 'sea',
+            'underwater', 'diving', 'snorkel', 'scuba', 'tropical',
+            'saltwater', 'species', 'specimen', 'animal', 'wildlife'
+        ]
+        if any(keyword in url_lower for keyword in allow_keywords):
+            return True
+
+        # 신뢰할 수 있는 이미지 호스팅 도메인들
+        trusted_domains = [
+            'imgur', 'flickr', 'wikimedia', 'googleusercontent',
+            'pinimg', 'unsplash', 'pexels', 'fishbase', 'inaturalist',
+            'eol.org', 'gbif.org', 'marinespecies.org'
+        ]
+        if any(domain in url_lower for domain in trusted_domains):
+            return True
+
         return False
     
-    def scrape_species(self, genus, species, common_names=None, target_images=1500):
+    def scrape_species(self, genus, species, common_names=None, target_images=1500, variant: str | None = None):
         """단일 종 스크래핑 (확장된 다중 소스)"""
         print(f"\n🔍 {genus} {species} 검색 중...")
         
         # 분류학적 계층에 따른 저장 폴더 생성
-        species_path = self._get_species_directory_path(genus, species)
+        species_path = self._get_species_directory_path(genus, species, variant)
         species_path.mkdir(parents=True, exist_ok=True)
         
         # 이미지 URL 수집 (다중 소스)
